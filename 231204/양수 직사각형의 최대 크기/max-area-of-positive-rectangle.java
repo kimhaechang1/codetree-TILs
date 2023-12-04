@@ -41,7 +41,7 @@ public class Main {
         if(maxh > n || maxh < -1 || maxw > m || maxw < -1) return false;
         for(int i = sy;i<maxh;i++){
             for(int j = sx;j<maxw;j++){
-                if(map[i][j] < 0) return false;
+                if(map[i][j] < 1) return false;
             }
         }
         return true;
