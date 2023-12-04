@@ -40,7 +40,7 @@ public class Main {
         int maxw = sx + w;
         if(maxh > n || maxh < -1 || maxw > m || maxw < -1) return false;
         for(int i = sy;i<maxh;i++){
-            for(int j = 0;j<maxw;j++){
+            for(int j = sx;j<maxw;j++){
                 if(map[i][j] < 0) return false;
             }
         }
