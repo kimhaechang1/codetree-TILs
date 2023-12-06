@@ -61,7 +61,7 @@ public class Main {
             map[y2][i] = map[y2][i+1];
         }
         // 오른쪽 변
-        for(int i = y2;i>y1-1;i--){
+        for(int i = y2;i>y1;i--){
             map[i][x2] = map[i-1][x2];
         }
         // 윗변 
