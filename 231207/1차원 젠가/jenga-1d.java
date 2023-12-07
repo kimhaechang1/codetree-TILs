@@ -24,7 +24,7 @@ public class Main {
             templen = 0;
             int start = Integer.parseInt(stk.nextToken())-1;
             int end = Integer.parseInt(stk.nextToken())-1;
-            for(int j = start;j<=end;j++){
+            for(int j = arrlen-start-1;j>=arrlen-end-1;j--){
                 arr[j] = 0;
             }
             
