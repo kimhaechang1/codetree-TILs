@@ -22,8 +22,8 @@ public class Main {
         for(int i = 0;i<2;i++){
             stk = new StringTokenizer(bf.readLine());
             templen = 0;
-            int start = Integer.parseInt(stk.nextToken());
-            int end = Integer.parseInt(stk.nextToken());
+            int start = Integer.parseInt(stk.nextToken())-1;
+            int end = Integer.parseInt(stk.nextToken())-1;
             for(int j = start;j<=end;j++){
                 arr[j] = 0;
             }
