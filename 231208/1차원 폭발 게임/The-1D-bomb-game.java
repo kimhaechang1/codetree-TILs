@@ -55,7 +55,7 @@ public class Main {
         return flg;
     }
     static void go(){
-        int [] temp = new int[arrlen];
+        int [] temp = new int[N];
         int tempidx = N-1;
         for(int i = N-1;i>N - 1 - arrlen;i--){
             if(arr[i] != 0){
