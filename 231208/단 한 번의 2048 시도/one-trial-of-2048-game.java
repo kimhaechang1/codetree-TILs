@@ -30,7 +30,7 @@ public class Main {
     static void go(int dir){
         boolean [][] isChanged = new boolean[4][4];
         if(dir == 0){
-            for(int i = 1;i<4;i--){
+            for(int i = 1;i<4;i++){
                 for(int j= 0;j<4;j++){
                     if(map[i-1][j] == 0){
                         map[i-1][j] = map[i][j];
