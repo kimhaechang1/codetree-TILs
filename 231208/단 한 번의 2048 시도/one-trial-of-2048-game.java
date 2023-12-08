@@ -32,14 +32,38 @@ public class Main {
         if(dir == 0){
             for(int i = 1;i<4;i++){
                 for(int j= 0;j<4;j++){
-                    if(map[i-1][j] == 0){
-                        map[i-1][j] = map[i][j];
-                        map[i][j] = 0;
-                    }else{
-                        if(map[i-1][j] == map[i][j] && !isChanged[i][j]){
-                            isChanged[i-1][j] = true;
-                            map[i-1][j] = map[i][j] * 2;
+                    int sy = i;
+                    int sx = j;
+                    if(map[sy][sx] == 0) continue;
+                    while(true){
+                        int ny= sy + dy[dir];
+                        int nx = sx + dx[dir];
+                        if(ny >= 4 || ny < 0 || nx >= 4 || nx < 0){
+                            map[sy][sx] = map[i][j];
                             map[i][j] = 0;
+                            break;
+                        } 
+                        if(map[ny][nx] == map[i][j] && !isChanged[ny][nx]){
+                            map[ny][nx] = map[i][j] * 2;
+                            isChanged[ny][nx] = true;
+                            map[i][j] = 0;
+
+                            break;
+                        }else if(map[ny][nx] == map[i][j] && isChanged[ny][nx]){
+                            map[sy][sx] = map[i][j];
+                            if(sy == i && sx == j) break;
+                            map[i][j] = 0;
+                            break;
+                        }else if(map[ny][nx] != map[i][j]){
+                            if(map[ny][nx] == 0){
+                                sy = ny;
+                                sx = nx;
+                            }else{
+                                map[sy][sx] = map[i][j];
+                                if(sy == i && sx == j) break;
+                                map[i][j] = 0;
+                                break;
+                            }
                         }
                     }
                 }
@@ -48,14 +72,38 @@ public class Main {
             
             for(int i = 2;i>-1;i--){
                 for(int j= 0;j<4;j++){
-                    if(map[i+1][j] == 0){
-                        map[i+1][j] = map[i][j];
-                        map[i][j] = 0;
-                    }else{
-                        if(map[i+1][j] == map[i][j] && !isChanged[i][j]){
-                            isChanged[i+1][j] = true;
-                            map[i+1][j] = map[i][j] * 2;
+                    int sy = i;
+                    int sx = j;
+                    if(map[sy][sx] == 0) continue;
+                    while(true){
+                        int ny= sy + dy[dir];
+                        int nx = sx + dx[dir];
+                        if(ny >= 4 || ny < 0 || nx >= 4 || nx < 0){
+                            map[sy][sx] = map[i][j];
                             map[i][j] = 0;
+                            break;
+                        } 
+                        if(map[ny][nx] == map[i][j] && !isChanged[ny][nx]){
+                            map[ny][nx] = map[i][j] * 2;
+                            isChanged[ny][nx] = true;
+                            map[i][j] = 0;
+
+                            break;
+                        }else if(map[ny][nx] == map[i][j] && isChanged[ny][nx]){
+                            map[sy][sx] = map[i][j];
+                            if(sy == i && sx == j) break;
+                            map[i][j] = 0;
+                            break;
+                        }else if(map[ny][nx] != map[i][j]){
+                            if(map[ny][nx] == 0){
+                                sy = ny;
+                                sx = nx;
+                            }else{
+                                map[sy][sx] = map[i][j];
+                                if(sy == i && sx == j) break;
+                                map[i][j] = 0;
+                                break;
+                            }
                         }
                     }
                 }
@@ -64,14 +112,38 @@ public class Main {
             
             for(int i = 0;i<4;i++){
                 for(int j= 1;j<4;j++){
-                    if(map[i][j-1] == 0){
-                        map[i][j-1] = map[i][j];
-                        map[i][j] = 0;
-                    }else{
-                        if(map[i][j-1] == map[i][j] && !isChanged[i][j]){
-                            isChanged[i][j-1] = true;
-                            map[i][j-1] = map[i][j] * 2;
+                    int sy = i;
+                    int sx = j;
+                    if(map[sy][sx] == 0) continue;
+                    while(true){
+                        int ny= sy + dy[dir];
+                        int nx = sx + dx[dir];
+                        if(ny >= 4 || ny < 0 || nx >= 4 || nx < 0){
+                            map[sy][sx] = map[i][j];
                             map[i][j] = 0;
+                            break;
+                        } 
+                        if(map[ny][nx] == map[i][j] && !isChanged[ny][nx]){
+                            map[ny][nx] = map[i][j] * 2;
+                            isChanged[ny][nx] = true;
+                            map[i][j] = 0;
+
+                            break;
+                        }else if(map[ny][nx] == map[i][j] && isChanged[ny][nx]){
+                            map[sy][sx] = map[i][j];
+                            if(sy == i && sx == j) break;
+                            map[i][j] = 0;
+                            break;
+                        }else if(map[ny][nx] != map[i][j]){
+                            if(map[ny][nx] == 0){
+                                sy = ny;
+                                sx = nx;
+                            }else{
+                                map[sy][sx] = map[i][j];
+                                if(sy == i && sx == j) break;
+                                map[i][j] = 0;
+                                break;
+                            }
                         }
                     }
                 }
@@ -80,14 +152,38 @@ public class Main {
             
             for(int i = 0;i<4;i++){
                 for(int j= 2;j>-1;j--){
-                    if(map[i][j+1] == 0){
-                        map[i][j+1] = map[i][j];
-                        map[i][j] = 0;
-                    }else{
-                        if(map[i][j+1] == map[i][j] && !isChanged[i][j]){
-                            isChanged[i][j+1] = true;
-                            map[i][j+1] = map[i][j] * 2;
+                    int sy = i;
+                    int sx = j;
+                    if(map[sy][sx] == 0) continue;
+                    while(true){
+                        int ny= sy + dy[dir];
+                        int nx = sx + dx[dir];
+                        if(ny >= 4 || ny < 0 || nx >= 4 || nx < 0){
+                            map[sy][sx] = map[i][j];
                             map[i][j] = 0;
+                            break;
+                        } 
+                        if(map[ny][nx] == map[i][j] && !isChanged[ny][nx]){
+                            map[ny][nx] = map[i][j] * 2;
+                            isChanged[ny][nx] = true;
+                            map[i][j] = 0;
+
+                            break;
+                        }else if(map[ny][nx] == map[i][j] && isChanged[ny][nx]){
+                            map[sy][sx] = map[i][j];
+                            if(sy == i && sx == j) break;
+                            map[i][j] = 0;
+                            break;
+                        }else if(map[ny][nx] != map[i][j]){
+                            if(map[ny][nx] == 0){
+                                sy = ny;
+                                sx = nx;
+                            }else{
+                                map[sy][sx] = map[i][j];
+                                if(sy == i && sx == j) break;
+                                map[i][j] = 0;
+                                break;
+                            }
                         }
                     }
                 }
