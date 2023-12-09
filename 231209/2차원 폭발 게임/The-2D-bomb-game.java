@@ -36,7 +36,7 @@ public class Main {
         while(checkAndBoom()){
             go();
         }
-        System.out.print(count());       
+        System.out.print(total);       
     }
     static boolean checkAndBoom(){
         boolean flg = false;
@@ -97,7 +97,6 @@ public class Main {
         int [][] temp = new int[n][n];
         for(int i = 0;i<n;i++){
             for(int j = 0;j<n;j++){
-                //if(map[i][j] == 0) continue;
                 temp[j][n-1-i] = map[i][j];
             }   
         }
@@ -106,23 +105,5 @@ public class Main {
                 map[i][j] = temp[i][j];
             }
         }
-    }
-    static int count(){
-        int cnt = 0;
-        for(int i =0;i<n;i++){
-            for(int j = 0;j<n;j++){
-                if(map[i][j] > 0) cnt++;
-            }
-        }
-        return cnt;
-    }
-    static void print(){
-        for(int i = 0;i<n;i++){
-            for(int j = 0;j<n;j++){
-                System.out.print(map[i][j] +" ");
-            }
-            System.out.println();
-        }
-        System.out.println("===============");
     }
 }
