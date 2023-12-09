@@ -36,7 +36,7 @@ public class Main {
         while(checkAndBoom()){
             go();
         }
-        System.out.print(total);       
+        System.out.print(count());       
     }
     static boolean checkAndBoom(){
         boolean flg = false;
@@ -105,5 +105,14 @@ public class Main {
                 map[i][j] = temp[i][j];
             }
         }
+    }
+    static int count(){
+        int cnt = 0;
+        for(int i =0;i<n;i++){
+            for(int j = 0;j<n;j++){
+                if(map[i][j] > 0) cnt++;
+            }
+        }
+        return cnt;
     }
 }
