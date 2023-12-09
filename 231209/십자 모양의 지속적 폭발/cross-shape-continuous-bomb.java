@@ -22,15 +22,16 @@ public class Main {
 
         for(int i = 0;i<m;i++){
             int q = Integer.parseInt(bf.readLine());
-            boom(q-1);
-            go();
+            if(boom(q-1)){
+                go();
+            }
         }
         print();
     }
-    static void boom(int sx){
+    static boolean boom(int sx){
         int sy = 0;
         while(true){
-            if(sy >= n) return;
+            if(sy >= n) return false;
             if(map[sy][sx] > 0) break;
             sy++;
         }
@@ -39,7 +40,7 @@ public class Main {
         
         int [] dy = {-1,1,0,0};
         int [] dx = {0,0,-1,1};
-        if(len <= 1) return;
+        if(len <= 1) return false;
         for(int k = 0;k<4;k++){
             for(int i = 1;i<len;i++){
                 int ny = sy + dy[k] *i;
@@ -48,6 +49,7 @@ public class Main {
                 map[ny][nx] = 0;
             }
         } 
+        return true;
         
     }
     static void go(){
