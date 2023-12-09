@@ -26,8 +26,8 @@ public class Main {
             }
         }
         while(k-- > 0){
-            if(checkAndBoom()){
-               go(); 
+            while(checkAndBoom()){
+                go();
             }
             rotate();
             go();
@@ -97,6 +97,7 @@ public class Main {
         int [][] temp = new int[n][n];
         for(int i = 0;i<n;i++){
             for(int j = 0;j<n;j++){
+                //if(map[i][j] == 0) continue;
                 temp[j][n-1-i] = map[i][j];
             }   
         }
@@ -114,5 +115,14 @@ public class Main {
             }
         }
         return cnt;
+    }
+    static void print(){
+        for(int i = 0;i<n;i++){
+            for(int j = 0;j<n;j++){
+                System.out.print(map[i][j] +" ");
+            }
+            System.out.println();
+        }
+        System.out.println("===============");
     }
 }
