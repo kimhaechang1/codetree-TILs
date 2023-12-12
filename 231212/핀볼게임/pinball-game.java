@@ -40,13 +40,11 @@ public class Main {
                 sd = 0;
                 dir = 3;
             }
-            //System.out.println()
             v = new boolean[n+2][n+2][4];
             v[sy+dy[dir]][sx+dx[dir]][dir] = true;
-            printvisit();
             max = Math.max(max, go(sy+dy[dir], sx+dx[dir], 1, dir));
         }
-        System.out.print(max+1);
+        System.out.print(max);
     }
     static int go(int sy, int sx, int time, int dir){
         int res = 0;
@@ -54,7 +52,7 @@ public class Main {
             dir = chk(sy, sx, dir);
             int ny = sy + dy[dir];
             int nx = sx + dx[dir];
-            if(ny >= n || ny < 0 || nx >= n || nx < 0){
+            if(ny >= n+1 || ny < 1 || nx >= n+1 || nx < 1){
                 res = time+1;
                 break;
             }
@@ -93,9 +91,5 @@ public class Main {
         }else{
             return preDir;
         }
-        
-    }
-    static void printvisit(){
-
     }
 }
