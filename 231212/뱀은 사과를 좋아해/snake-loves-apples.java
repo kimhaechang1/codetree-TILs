@@ -22,6 +22,7 @@ public class Main {
             int x = Integer.parseInt(stk.nextToken())-1;
             map[y][x] = 2;
         }
+        map[0][0] = 1;
         deque.addLast(new int[]{0,0});
         String [] command = new String[k];
         for(int i = 0;i<k;i++){
@@ -64,18 +65,19 @@ public class Main {
             int [] data = deque.peekFirst();
             int ny = data[0] + dy[d];
             int nx = data[1] + dx[d];
-            if(ny >= n|| ny < 0 || nx >= n || nx < 0 || map[ny][nx] == 1) return false;
+            if(ny >= n|| ny < 0 || nx >= n || nx < 0) return false;
             if(map[ny][nx] == 2){
                 map[ny][nx] = 1;
                 deque.addFirst(new int[]{ny, nx});
-            }else if(map[ny][nx] == 0){
+            }else{
                 int [] tail = deque.pollLast();
                 map[tail[0]][tail[1]] = 0;
+                if(map[ny][nx] == 1) return false;
                 map[ny][nx] = 1;
                 deque.addFirst(new int[]{ny, nx});
             }
             
         }
         return true;
-    }   
+    }
 }
