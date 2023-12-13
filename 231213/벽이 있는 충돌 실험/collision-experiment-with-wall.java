@@ -2,12 +2,11 @@ import java.util.*;
 import java.io.*;
 
 public class Main {
-    static int [][] map;
+    static int [][][] map;
     static int n;
     static int m;
     static int [] dy = {-1,1,0,0};
     static int [] dx = {0,0,-1,1};
-    static Queue<int []> queue;
     static StringTokenizer stk;
     public static void main(String[] args) throws Exception {
         BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
@@ -17,8 +16,7 @@ public class Main {
             stk = new StringTokenizer(bf.readLine());
             n = Integer.parseInt(stk.nextToken());
             m = Integer.parseInt(stk.nextToken());
-            map = new int[n][n];
-            queue = new ArrayDeque<>();
+            map = new int[n][n][2];
             for(int i = 0;i<m;i++){
                 stk = new StringTokenizer(bf.readLine());
                 int y = Integer.parseInt(stk.nextToken())-1;
@@ -34,41 +32,44 @@ public class Main {
                 }else{
                     d = 3;
                 }
-                queue.add(new int[]{y, x, d});
+                map[y][x][0] = 1;
+                map[y][x][1] = d;
             }
             int time = n*2;
             while(time-- > 0){
-                int [][] ncount = new int[n][n];
-                int [][] dirs = new int[n][n];
-                int size=queue.size();
-                for(int i= 0;i<size;i++){
-                    int [] now = queue.poll();
-                    int ny = now[0] + dy[now[2]];
-                    int nx = now[1] + dx[now[2]];
-                    if(ny >= n || ny < 0 || nx >= n || nx < 0){
-                        if(now[2] == 0){
-                            now[2] = 1;
-                        }else if(now[2] == 1){
-                            now[2] = 0;
-                        }else if(now[2] == 2){
-                            now[2] = 3;
-                        }else{
-                            now[2] = 2;
+                int [][][] ncount = new int[n][n][2];
+                for(int i= 0;i<n;i++){
+                    for(int j = 0;j<n;j++){
+                       if(map[i][j][0] == 0) continue;
+                        int ny = i + dy[map[i][j][1]];
+                        int nx = j + dx[map[i][j][1]];
+                        if(ny >= n || ny < 0 || nx >= n || nx < 0){
+                            if(map[i][j][1] == 0){
+                                map[i][j][1] = 1;
+                            }else if(map[i][j][1] == 1){
+                                map[i][j][1] = 0;
+                            }else if(map[i][j][1] == 2){
+                                map[i][j][1] = 3;
+                            }else{
+                                map[i][j][1] = 2;
+                            }
+                            ny = i;
+                            nx = j;
                         }
-                        ny = now[0];
-                        nx = now[1];
-                        //System.out.println("ny : "+nx +" ny : "+ny+" now[2] :" + now[2]);
+                        ncount[ny][nx][0]++;
+                        ncount[ny][nx][1] = map[i][j][1];
                     }
-                    dirs[ny][nx] = now[2];
-                    ncount[ny][nx]++;
                 }
-                
                 for(int i = 0;i<n;i++){
-                    for(int j= 0;j<n;j++){
-                        if(ncount[i][j] > 1){
-                            m -= ncount[i][j];
-                        }else if(ncount[i][j] == 1){
-                            queue.add(new int[]{i, j ,dirs[i][j]});
+                    for(int j = 0;j<n;j++){
+                        if(ncount[i][j][0] > 1){
+                            m -= ncount[i][j][0];
+                        }else if(ncount[i][j][0] == 1){
+                            map[i][j][0] = ncount[i][j][0];
+                            map[i][j][1] = ncount[i][j][1];
+                        }else{
+                            map[i][j][0] = 0;
+                            map[i][j][1] = 0;
                         }
                     }
                 }
@@ -76,15 +77,5 @@ public class Main {
             sb.append(m).append("\n");
         }
         System.out.print(sb);
-    }
-    static void print(int [][] arr){
-        StringBuilder sb = new StringBuilder();
-        for(int i = 0;i<n;i++){
-            for(int j = 0;j<n;j++){
-                sb.append(arr[i][j]).append(" ");
-            }
-            sb.append("\n");
-        }
-        System.out.print(sb+"=================\n");
     }
 }
