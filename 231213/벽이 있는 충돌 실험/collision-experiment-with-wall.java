@@ -64,6 +64,8 @@ public class Main {
                     for(int j = 0;j<n;j++){
                         if(ncount[i][j][0] > 1){
                             m -= ncount[i][j][0];
+                            map[i][j][0] = 0;
+                            map[i][j][1] = 0;
                         }else if(ncount[i][j][0] == 1){
                             map[i][j][0] = ncount[i][j][0];
                             map[i][j][1] = ncount[i][j][1];
@@ -77,5 +79,14 @@ public class Main {
             sb.append(m).append("\n");
         }
         System.out.print(sb);
+    }
+    static void print(int [][][] arr){
+        for(int i = 0;i<n;i++){
+            for(int j = 0;j<n;j++){
+                System.out.print(arr[i][j][0]+" ");
+            }
+            System.out.println();
+        }
+        System.out.println("===================");
     }
 }
