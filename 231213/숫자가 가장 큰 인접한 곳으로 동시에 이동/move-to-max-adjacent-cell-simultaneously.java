@@ -45,11 +45,11 @@ public class Main {
             int [] now = queue.poll();
             int cany = now[0];
             int canx = now[1];
-            int maxVal = now[2];
+            int maxVal = -1;
             for(int k = 0;k<4;k++){
                 int ny = now[0] + dy[k];
                 int nx = now[1] + dx[k];
-                if(ny >= n || ny < 0 || nx >= n || nx < 0 || map[ny][nx] <= now[2]) continue;
+                if(ny >= n || ny < 0 || nx >= n || nx < 0) continue;
                 if(maxVal < map[ny][nx]){
                     maxVal = map[ny][nx];
                     cany = ny;
@@ -69,4 +69,16 @@ public class Main {
             }
         }
     }
+    static void print(){
+        StringBuilder sb = new StringBuilder();
+        for(int i = 0;i<n;i++){
+            for(int j = 0;j<n;j++){
+                sb.append(ncount[i][j]).append(" ");
+            }
+            sb.append("\n");
+        }
+        System.out.print(sb+"======================\n");
+        
+    }
+
 }
