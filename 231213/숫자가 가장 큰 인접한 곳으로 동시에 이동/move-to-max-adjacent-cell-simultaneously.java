@@ -27,13 +27,13 @@ public class Main {
             stk =new StringTokenizer(bf.readLine());
             int y = Integer.parseInt(stk.nextToken())-1;
             int x = Integer.parseInt(stk.nextToken())-1;
-            queue.add(new int[]{y, x, map[y][x]});
+            queue.add(new int[]{y, x});
         }
 
         while(t-- >0){
             ncount = new int[n][n];
             bfs();
-            collaps();
+            collapsAndPushQueue();
         }
         System.out.println(m);
     }
@@ -57,28 +57,19 @@ public class Main {
                 }
             }
             ncount[cany][canx]++;
-            queue.add(new int[]{cany, canx, now[2]});
         }
     }
-    static void collaps(){
+    static void collapsAndPushQueue(){
         for(int i = 0;i<n;i++){
             for(int j =0;j<n;j++){
                 if(ncount[i][j] > 1){
                     m -= ncount[i][j];
+                }else if(ncount[i][j] == 1){
+                    queue.add(new int[]{i, j});
                 }
             }
         }
     }
-    static void print(){
-        StringBuilder sb = new StringBuilder();
-        for(int i = 0;i<n;i++){
-            for(int j = 0;j<n;j++){
-                sb.append(ncount[i][j]).append(" ");
-            }
-            sb.append("\n");
-        }
-        System.out.print(sb+"======================\n");
-        
-    }
+    
 
 }
