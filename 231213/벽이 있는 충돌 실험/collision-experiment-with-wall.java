@@ -36,7 +36,7 @@ public class Main {
                 }
                 queue.add(new int[]{y, x, d});
             }
-            int time = n*2 - 2;
+            int time = n*2;
             while(time-- > 0){
                 int [][] ncount = new int[n][n];
                 int [][] dirs = new int[n][n];
@@ -55,8 +55,8 @@ public class Main {
                         }else{
                             now[2] = 2;
                         }
-                        ny = now[0] + dy[now[2]];
-                        nx = now[1] + dx[now[2]];
+                        ny = now[0];
+                        nx = now[1];
                         //System.out.println("ny : "+nx +" ny : "+ny+" now[2] :" + now[2]);
                     }
                     dirs[ny][nx] = now[2];
@@ -76,6 +76,15 @@ public class Main {
             sb.append(m).append("\n");
         }
         System.out.print(sb);
-        
+    }
+    static void print(int [][] arr){
+        StringBuilder sb = new StringBuilder();
+        for(int i = 0;i<n;i++){
+            for(int j = 0;j<n;j++){
+                sb.append(arr[i][j]).append(" ");
+            }
+            sb.append("\n");
+        }
+        System.out.print(sb+"=================\n");
     }
 }
