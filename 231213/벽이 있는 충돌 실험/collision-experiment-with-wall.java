@@ -80,13 +80,4 @@ public class Main {
         }
         System.out.print(sb);
     }
-    static void print(int [][][] arr){
-        for(int i = 0;i<n;i++){
-            for(int j = 0;j<n;j++){
-                System.out.print(arr[i][j][0]+" ");
-            }
-            System.out.println();
-        }
-        System.out.println("===================");
-    }
 }
