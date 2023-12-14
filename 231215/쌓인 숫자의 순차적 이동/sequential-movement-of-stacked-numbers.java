@@ -56,22 +56,8 @@ public class Main {
             }
         }
         public void link(Node start, Node end, int find){
-            Node temp = head;
-            while(true){
-                Node next = temp.next;
-                
-                if(next.val == find){
-                    temp = next;
-                    break;
-                }else if(next.val == -1){
-                    break;
-                }
-                temp = next;
-            }
-            if(temp.val == -1) return;
-            
-            start.prev = temp;
-            temp.next = start;
+            tail.prev.next = start;
+            start.prev = tail.prev;
             end.next = tail;
             tail.prev = end;
         }
@@ -139,6 +125,7 @@ public class Main {
             }else {
             	linkedList[maxY][maxX].link(fromStart,fromLast , max);
             }
+            //print(linkedList[maxY][maxX]);
             linkedList[maxY][maxX].caching(maxY, maxX);
         }
         StringBuilder sb = new StringBuilder();
