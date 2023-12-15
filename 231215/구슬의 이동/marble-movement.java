@@ -9,7 +9,7 @@ public class Main {
     static int [][] status;
     static int [] dy = {-1,1,0,0};
     static int [] dx = {0,0,-1,1};
-    static PriorityQueue<int []> [][] pq;
+    static ArrayList<int []> [][] list;
     static StringTokenizer stk;
     static boolean [] dead;
     public static void main(String[] args) throws Exception{
@@ -19,17 +19,11 @@ public class Main {
         m = Integer.parseInt(stk.nextToken());
         t = Integer.parseInt(stk.nextToken());
         k = Integer.parseInt(stk.nextToken());
-        pq = new PriorityQueue[n][n];
-        for(int i = 0;i<n;i++){
-            for(int j =0;j<n;j++){
-                pq[i][j] = new PriorityQueue<>((o1, o2)->{
-                    // idx,v
-                    if(o1[1] == o2[1]){
-                        return o2[0] - o1[0];
-                    }
-                    return o2[1] - o1[1];
-                });
-            }
+        list = new ArrayList[n][n];
+        for(int i = 0;i<n;i++) {
+        	for(int j = 0;j<n;j++) {
+        		list[i][j] = new ArrayList<>();
+        	}
         }
         dead = new boolean[m];
         status = new int[m][4];
@@ -53,12 +47,16 @@ public class Main {
             kchk();
         }
         //System.out.println(Arrays.toString(dead));
-        System.out.println(m);
+        int cnt = 0;
+        for(int i = 0;i<m;i++) {
+        	if(!dead[i]) cnt++;
+        }
+        System.out.println(cnt);
     }
     static void init(){
         for(int i = 0;i<n;i++){
             for(int j = 0;j<n;j++){
-                pq[i][j].clear();
+                list[i][j].clear();
             }
         }
     }
@@ -88,7 +86,7 @@ public class Main {
                 y = ny;
                 x = nx;
             }
-            pq[y][x].add(new int[]{i, status[i][3]});
+            list[y][x].add(new int[]{i, status[i][3]});
             status[i][0] = y;
             status[i][1] = x;
             status[i][2] = dir;
@@ -97,17 +95,19 @@ public class Main {
     static void kchk(){
         for(int i = 0;i<n;i++){
             for(int j =0;j<n;j++){
-                if(pq[i][j].size() > k){
-                    int cnt = k;
-                    while(cnt-- > 0){
-                        pq[i][j].poll();
-                    } 
-                    while(!pq[i][j].isEmpty()){
-                        int [] now = pq[i][j].poll();
-                        dead[now[0]] = true;
-                        --m;
-                    }
+                if(list[i][j].size() > k) {
+                	Collections.sort(list[i][j], (o1, o2)->{
+                		if(o2[1] == o1[1]) {
+                			return o2[0] - o1[0];
+                		}
+                		return o2[1] - o1[1];
+                	});
+                	for(int p = k;p<list[i][j].size();p++) {
+                		int [] now = list[i][j].get(p);
+                		dead[now[0]] = true;
+                	}
                 }
+                
             }
         }
     }
