@@ -34,7 +34,7 @@ public class Main {
             // 홀추 초의 시간에는 좌우 위치가 바뀌는 
             int maxT = 0;
             int k = 0;
-            while(maxT++ < 2000){
+            while(maxT++ < 4001){
                 move();
                 if(chk()){
                     k = Math.max(k, maxT);
