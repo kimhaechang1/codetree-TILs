@@ -23,7 +23,7 @@ public class Main {
         for(int i = 0;i<n;i++){
             for(int j =0;j<n;j++){
                 pq[i][j] = new PriorityQueue<>((o1, o2)->{
-                    // idx, d, v
+                    // idx,v
                     if(o1[1] == o2[1]){
                         return o2[0] - o1[0];
                     }
@@ -50,6 +50,7 @@ public class Main {
             move();
             kchk();
         }
+        //System.out.println(Arrays.toString(dead));
         System.out.println(m);
     }
     static void init(){
@@ -85,7 +86,7 @@ public class Main {
                 y = ny;
                 x = nx;
             }
-            pq[y][x].add(new int[]{i, v});
+            pq[y][x].add(new int[]{i, status[i][3]});
             status[i][0] = y;
             status[i][1] = x;
             status[i][2] = dir;
@@ -96,7 +97,9 @@ public class Main {
             for(int j =0;j<n;j++){
                 if(pq[i][j].size() > k){
                     int cnt = k;
-                    while(cnt-- > 0) pq[i][j].poll();
+                    while(cnt-- > 0){
+                        pq[i][j].poll();
+                    } 
                     while(!pq[i][j].isEmpty()){
                         int [] now = pq[i][j].poll();
                         dead[now[0]] = true;
