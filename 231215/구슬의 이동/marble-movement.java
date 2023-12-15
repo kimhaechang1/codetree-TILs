@@ -46,8 +46,10 @@ public class Main {
         }
 
         while(t-- > 0){
+            //System.out.println("#t : "+t);
             init();
             move();
+            //print();
             kchk();
         }
         //System.out.println(Arrays.toString(dead));
@@ -118,6 +120,11 @@ public class Main {
             return 2;
         }else{
             return 3;
+        }
+    }
+    static void print(){
+        for(int i = 0;i<m;i++){
+            System.out.println(Arrays.toString(status[i]));
         }
     }
 }
