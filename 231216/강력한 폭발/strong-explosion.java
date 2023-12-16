@@ -53,7 +53,7 @@ public class Main {
         return cp;
     }
     static int go(int [][] m){
-        int res = 2;
+        int res = cnt;
         int [][][] d = {
             {{},{},{},{}},
             { 
