@@ -7,6 +7,7 @@ public class Main {
     static int [] res;
     public static void main(String[] args) throws Exception{
         BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
+        n = Integer.parseInt(bf.readLine());
         cnt = 0;
         res = new int[n];
         dfs(0);
