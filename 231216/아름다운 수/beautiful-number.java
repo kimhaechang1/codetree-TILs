@@ -33,19 +33,19 @@ public class Main {
             if(prev == arr[i]){
                 if(prev == 2){
                     if(cnt == 2){
-                        cnt = 0;
+                        cnt = 1;
                     }else{
                         cnt++;
                     }
                 }else if(prev == 3){
                     if(cnt == 3){
-                        cnt = 0;
+                        cnt = 1;
                     }else{
                         cnt++;
                     }
                 }else if(prev == 4){
                     if(cnt == 4){
-                        cnt = 0;
+                        cnt = 1;
                     }else{
                         cnt++;
                     }
