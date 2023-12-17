@@ -15,7 +15,7 @@ public class Main {
         stk = new StringTokenizer(bf.readLine());
         n = Integer.parseInt(stk.nextToken());
         m = Integer.parseInt(stk.nextToken());
-        selected = new boolean[15];
+        selected = new boolean[m];
         map = new int[15][n];
         bridge = new int[m][2];
         for(int i = 0;i<m;i++){
@@ -29,6 +29,7 @@ public class Main {
         min = m;
         init();
         dfs(0);
+        
         System.out.print(min);
     }
     static void init(){
@@ -68,7 +69,7 @@ public class Main {
     }
     static int [][] initMap(){
         int [][] cp = new int[15][n];
-        for(int i =0;i<m;i++){
+        for(int i =0;i<15;i++){
             for(int j = 0;j<n;j++) {
             	cp[i][j] = -1;
             }
@@ -116,7 +117,6 @@ public class Main {
                 if(sy == 15){
                     break;
                 }
-                //System.out.println("sy : "+sy+" sx : "+sx);
                 v[sy][sx] = true;
                 if(cp[sy][sx] > -1 && !v[sy][cp[sy][sx]]){
                     sx = cp[sy][sx];
