@@ -15,8 +15,8 @@ public class Main {
         stk = new StringTokenizer(bf.readLine());
         n = Integer.parseInt(stk.nextToken());
         m = Integer.parseInt(stk.nextToken());
-        selected = new boolean[m];
-        map = new int[m][n];
+        selected = new boolean[15];
+        map = new int[15][n];
         bridge = new int[m][2];
         for(int i = 0;i<m;i++){
             stk = new StringTokenizer(bf.readLine());
@@ -67,7 +67,7 @@ public class Main {
         dfs(depth+1);
     }
     static int [][] initMap(){
-        int [][] cp = new int[m][n];
+        int [][] cp = new int[15][n];
         for(int i =0;i<m;i++){
             for(int j = 0;j<n;j++) {
             	cp[i][j] = -1;
@@ -89,11 +89,11 @@ public class Main {
         int [] r= new int[n];
         
         for(int i = 0;i<n;i++){
-        	boolean [][] v = new boolean[m][n];
+        	boolean [][] v = new boolean[15][n];
             int sy = 0;
             int sx = i;
             while(true){
-                if(sy == m){
+                if(sy == 15){
                     r[i] = sx;
                     break;
                 }
@@ -111,9 +111,9 @@ public class Main {
         for(int i = 0;i<n;i++){
             int sy = 0;
             int sx = i;
-            boolean [][] v = new boolean[m][n];
+            boolean [][] v = new boolean[15][n];
             while(true){
-                if(sy == m){
+                if(sy == 15){
                     break;
                 }
                 //System.out.println("sy : "+sy+" sx : "+sx);
