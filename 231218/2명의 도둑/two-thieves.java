@@ -8,6 +8,9 @@ public class Main {
     static int c;
     static int [][] map;
     static int max;
+    static int max1;
+    static int max2;
+    static boolean [] sel; 
     public static void main(String[] args) throws Exception {
         BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
         stk = new StringTokenizer(bf.readLine());
@@ -30,22 +33,13 @@ public class Main {
     }
     static void dfs(int depth, int sy, int sx, int [] s1, int [] s2){
         if(depth == 2){
-            int suma = 0;
-            int sumb = 0;
-            int total = 0;
-            //System.out.println("도둑 a 가 고른 : "+Arrays.toString(s1));
-            //System.out.println("도둑 b 가 고른 : "+Arrays.toString(s2));
-            for(int i = 0;i<m;i++){
-            	if(suma + s1[i] <= c) {
-            		suma  += s1[i];
-            		total += (s1[i]*s1[i]);
-            	}
-            	if(sumb + s2[i] <= c) {
-            		sumb += s2[i];
-            		total += (s2[i]*s2[i]);
-            	}
-            }
-            max = Math.max(max, total);
+        	max1 = 0;
+        	max2 = 0;
+            sel = new boolean[m];
+            go1(0, 0, s1);
+            sel = new boolean[m];
+            go2(0, 0, s2);
+            max = Math.max(max, (max1 + max2));
             return;
         }
         if(depth == 0){
@@ -76,5 +70,38 @@ public class Main {
                 }
             }
         }
+    }
+    static void go1(int depth, int sum, int [] arr) {
+    	if(sum > c) return;
+    	if(depth == m) {
+    		int total = 0;
+    		for(int i = 0;i<m;i++) {
+    			if(!sel[i]) continue;
+    			total += (arr[i]*arr[i]);
+    		}
+    		max1 = Math.max(total, max1);
+    		return;
+    	}
+    	sel[depth] = true;
+    	go1(depth+1, sum + arr[depth], arr);
+    	sel[depth] = false;
+    	go1(depth+1, sum, arr);
+    }
+    
+    static void go2(int depth, int sum, int [] arr) {
+    	if(sum > c) return;
+    	if(depth == m) {
+    		int total = 0;
+    		for(int i = 0;i<m;i++) {
+    			if(!sel[i]) continue;
+    			total += (arr[i]*arr[i]);
+    		}
+    		max2 = Math.max(total, max2);
+    		return;
+    	}
+    	sel[depth] = true;
+    	go2(depth+1, sum + arr[depth], arr);
+    	sel[depth] = false;
+    	go2(depth+1, sum, arr);
     }
 }
