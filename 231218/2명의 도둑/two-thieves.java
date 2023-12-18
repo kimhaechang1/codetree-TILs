@@ -22,8 +22,8 @@ public class Main {
             }
         }   
         max = 0;
-        int [] s1 = new int[2];
-        int [] s2 = new int[2];
+        int [] s1 = new int[m];
+        int [] s2 = new int[m];
         dfs(0, 0, 0, s1, s2);
         
         System.out.print(max); 
@@ -33,7 +33,9 @@ public class Main {
             int suma = 0;
             int sumb = 0;
             int total = 0;
-            for(int i = 0;i<2;i++){
+            //System.out.println("도둑 a 가 고른 : "+Arrays.toString(s1));
+            //System.out.println("도둑 b 가 고른 : "+Arrays.toString(s2));
+            for(int i = 0;i<m;i++){
             	if(suma + s1[i] <= c) {
             		suma  += s1[i];
             		total += (s1[i]*s1[i]);
@@ -48,36 +50,31 @@ public class Main {
         }
         if(depth == 0){
             for(int i = sy;i<n-1;i++){
-                for(int j = 0;j<n-1;j++){
-                    s1[0] = map[i][j];
-                    s1[1] = map[i][j+1];
-                    dfs(depth+1, i, j+2, s1, s2);
-                    s1[0] = 0;
-                    s1[1] = 0;
+                for(int j = 0;j<n-(m-1);j++){
+                	for(int k = j;k<j+m;k++) {
+                		s1[k-j] = map[i][k];
+                	}
+                	dfs(depth+1, i, j+m, s1, s2);
                 }
             }
         }
         if(depth == 1){
-            if(sx+1 < n){
-                for(int i = sx;i<n-1;i++){
-                    s2[0] = map[sy][i];
-                    s2[1] = map[sy][i+1];
-                    dfs(depth+1, sy, i, s1, s2);
-                    s2[0] = 0;
-                    s2[1] = 0;
+            if(sx+(m-1) < n){
+                for(int i = sx;i<n-(m-1);i++){
+                	for(int k = i;k<i+m;k++) {
+                		s2[k-i] = map[i][k];
+                	}
+                	dfs(depth+1, sy, i+m, s1, s2);
                 }
             }
             for(int i = sy+1;i<n;i++){
-                for(int j = 0;j<n-1;j++){
-                    s2[0] = map[i][j];
-                    s2[1] = map[i][j+1];
-                    dfs(depth+1, i, j, s1, s2);
-                    s2[0] = 0;
-                    s2[0] = 0;
+                for(int j = 0;j<n-(m-1);j++){
+                	for(int k = j;k<j+m;k++) {
+                		s2[k-j] = map[i][k];
+                	}
+                	dfs(depth+1, i, j, s1, s2);
                 }
             }
-            
         }
-        
     }
 }
