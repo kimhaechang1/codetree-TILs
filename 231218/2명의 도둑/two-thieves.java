@@ -33,6 +33,8 @@ public class Main {
     }
     static void dfs(int depth, int sy, int sx, int [] s1, int [] s2){
         if(depth == 2){
+        	//System.out.println("도둑 1 : "+Arrays.toString(s1));
+        	//System.out.println("도둑 2 : "+Arrays.toString(s2));
         	max1 = 0;
         	max2 = 0;
             sel = new boolean[m];
@@ -56,7 +58,7 @@ public class Main {
             if(sx+(m-1) < n){
                 for(int i = sx;i<n-(m-1);i++){
                 	for(int k = i;k<i+m;k++) {
-                		s2[k-i] = map[i][k];
+                		s2[k-i] = map[sy][k];
                 	}
                 	dfs(depth+1, sy, i+m, s1, s2);
                 }
