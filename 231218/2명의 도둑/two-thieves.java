@@ -43,7 +43,7 @@ public class Main {
             return;
         }
         if(depth == 0){
-            for(int i = sy;i<n-1;i++){
+            for(int i = sy;i<n;i++){
                 for(int j = 0;j<n-(m-1);j++){
                 	for(int k = j;k<j+m;k++) {
                 		s1[k-j] = map[i][k];
