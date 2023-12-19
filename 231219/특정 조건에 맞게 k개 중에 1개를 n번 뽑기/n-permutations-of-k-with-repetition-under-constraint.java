@@ -14,15 +14,11 @@ public class Main {
         k = Integer.parseInt(stk.nextToken());
         n = Integer.parseInt(stk.nextToken());
         res = new int[n];
-        count = new int[k+1];
-        for(int i = 1;i<=k;i++){
-            count[i] = 2;
-        }
         sb = new StringBuilder();
-        dfs(0);
+        dfs(0,0,0);
         System.out.print(sb);
     }
-    static void dfs(int depth){
+    static void dfs(int depth, int prev, int cnt){
         if(depth == n){
             for(int a : res) sb.append(a).append(" ");
             sb.append("\n");
@@ -30,11 +26,12 @@ public class Main {
         }
 
         for(int i = 1;i<=k;i++){
-            if(count[i] > 0){
+            if(prev == i && cnt < 2){
                 res[depth] = i;
-                count[i]--;
-                dfs(depth+1);
-                count[i]++;
+                dfs(depth+1, prev, cnt+1);
+            }else if(prev != i){
+                res[depth]= i;
+                dfs(depth+1, i, 1);
             }
         }
     }
