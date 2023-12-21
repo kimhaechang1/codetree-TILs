@@ -50,7 +50,6 @@ public class Main {
             int sum = 0;
             int y = sy;
             int x = sx;
-            //System.out.println(Arrays.toString(res));
             for(int i = 0;i<limit;i++){
                 int [] pos = hashmap.get(res[i]);
                 sum += (Math.abs(y - pos[0]) + Math.abs(x - pos[1]));
