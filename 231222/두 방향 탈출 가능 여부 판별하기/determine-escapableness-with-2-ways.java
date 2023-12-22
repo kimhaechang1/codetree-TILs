@@ -21,7 +21,7 @@ public class Main {
                 map[i][j] = Integer.parseInt(stk.nextToken());
             }
         }
-
+        v[0][0] = true;
         dfs(0,0);
         System.out.print(v[n-1][m-1] ? 1 : 0);
     }
