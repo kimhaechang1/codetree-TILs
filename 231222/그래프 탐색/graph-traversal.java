@@ -26,15 +26,18 @@ public class Main {
         }
         max = 1;
         v[1] = true;
-        dfs(0, 1, 0);
-        System.out.println(max);
+        dfs(0, 1);
+        int cnt = 0;
+        for(int i = 2;i<n+1;i++){
+            cnt = v[i] ? cnt+1 : cnt;
+        }
+        System.out.println(cnt);
     }
-    static void dfs(int depth, int pres, int cnt){
-        max = Math.max(cnt, max);
+    static void dfs(int depth, int pres){
         for(int vertex : g[pres]){
             if(v[vertex]) continue;
             v[vertex] = true;
-            dfs(depth+1, vertex, cnt+1);
+            dfs(depth+1, vertex);
         }
     }
 }
