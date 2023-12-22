@@ -25,12 +25,13 @@ public class Main {
     static void dfs(int depth, int pres, int sum){
         if(min < sum) return;
         if(depth == n-1){
+            if(map[pres][0] == 0) return;
             sum += map[pres][0];
             min = Math.min(min, sum);
             return;
         }
 
-        for(int i = 1;i<n;i++){
+        for(int i = 0;i<n;i++){
             if(v[i]) continue;
             if(map[pres][i] == 0) continue;
             v[i] = true;
