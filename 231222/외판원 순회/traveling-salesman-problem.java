@@ -32,6 +32,7 @@ public class Main {
 
         for(int i = 1;i<n;i++){
             if(v[i]) continue;
+            if(map[pres][i] == 0) continue;
             v[i] = true;
             dfs(depth+1, i, sum+map[pres][i]);
             v[i] = false;
