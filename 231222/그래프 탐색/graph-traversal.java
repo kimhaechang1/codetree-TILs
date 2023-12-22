@@ -7,6 +7,7 @@ public class Main {
     static int n, m;
     static StringTokenizer stk;
     static int max;
+    static int cnt;
     public static void main(String[] args) throws Exception{
         BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
         stk = new StringTokenizer(bf.readLine());
@@ -26,17 +27,15 @@ public class Main {
         }
         max = 1;
         v[1] = true;
+        cnt = 0;
         dfs(0, 1);
-        int cnt = 0;
-        for(int i = 2;i<n+1;i++){
-            cnt = v[i] ? cnt+1 : cnt;
-        }
         System.out.println(cnt);
     }
     static void dfs(int depth, int pres){
         for(int vertex : g[pres]){
             if(v[vertex]) continue;
             v[vertex] = true;
+            cnt++;
             dfs(depth+1, vertex);
         }
     }
