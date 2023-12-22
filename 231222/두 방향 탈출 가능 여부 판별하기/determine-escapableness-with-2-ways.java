@@ -26,6 +26,7 @@ public class Main {
         System.out.print(v[n-1][m-1] ? 1 : 0);
     }
     static void dfs(int y, int x){
+        
         if(y == n-1 && x == m-1){
             return;
         }
@@ -36,12 +37,13 @@ public class Main {
             if(OOB(ny, nx)) continue;
             if(v[ny][nx]) continue;
             if(map[ny][nx] == 0) continue;
+            
             v[ny][nx] = true;
             dfs(ny, nx);
         }
     }
     static boolean OOB(int y, int x){
-        if(y >= n || y < 0 || x >= n || x < 0) return true;
+        if(y >= n || y < 0 || x >= m || x < 0) return true;
         return false;
     }
 }
