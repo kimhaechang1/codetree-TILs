@@ -26,12 +26,13 @@ public class Main {
         sx = Integer.parseInt(stk.nextToken())-1;
         while(k-- > 0){
             if(!findMax()) break;
+            //System.out.println("sy : "+ sy + " sx : "+sx);
         }
         System.out.print((sy+1)+" "+(sx+1));
     }
     static boolean findMax(){
         int l = map[sy][sx];
-        int max = 1;
+        int max = 0;
         boolean flg = false;
         int cy = -1;
         int cx = -1;
