@@ -33,19 +33,23 @@ public class Main {
         int l = map[sy][sx];
         int max = 1;
         boolean flg = false;
+        int cy = -1;
+        int cx = -1;
         for(int i = 0;i<n;i++){
             for(int j = 0;j<n;j++){
                 if(l > map[i][j] && max < map[i][j]){
-                    //System.out.println("ty : "+i +" tx : "+j);
                     if(bfs(i, j, l)){
                         flg = true;
-                        sy = i;
-                        sx = j;
-                        
+                        cy = i;
+                        cx = j;
                         max = map[i][j];
                     }
                 }
             }
+        }
+        if(flg){
+            sy = cy;
+            sx = cx;
         }
         return flg;
     }
