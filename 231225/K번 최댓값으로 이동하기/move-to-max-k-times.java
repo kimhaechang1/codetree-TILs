@@ -27,7 +27,7 @@ public class Main {
         while(k-- > 0){
             if(!findMax()) break;
         }
-        System.out.print(sy+" "+sx);
+        System.out.print((sy+1)+" "+(sx+1));
     }
     static boolean findMax(){
         int l = map[sy][sx];
@@ -41,7 +41,7 @@ public class Main {
                         flg = true;
                         sy = i;
                         sx = j;
-                        //System.out.println("sy : "+sy +" sx : "+sx);
+                        
                         max = map[i][j];
                     }
                 }
@@ -56,8 +56,7 @@ public class Main {
         v[sy][sx] = true;
         while(!queue.isEmpty()){
             int [] now = queue.poll();
-            //System.out.println(Arrays.toString(now));
-            if(now[0] == sy && now[1] == sx){
+            if(now[0] == y && now[1] == x){
                 return true;
             }
             for(int k = 0;k<4;k++){
