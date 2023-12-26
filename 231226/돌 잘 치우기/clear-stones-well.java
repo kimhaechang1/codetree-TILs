@@ -60,7 +60,7 @@ public class Main {
             return;
         }
 
-        for(int i = cur;i<m;i++){
+        for(int i = cur;i<posList.size();i++){
             res[depth] = i;
             dfs(depth+1, i+1);
         }
