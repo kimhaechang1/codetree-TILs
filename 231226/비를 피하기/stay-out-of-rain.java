@@ -44,13 +44,14 @@ public class Main {
         while(!queue.isEmpty()){
                 int [] now = queue.poll();
                 if(map[now[2]][now[3]] == 3){
-                    res[now[0]][now[1]] = now[5];
+                    if(res[now[0]][now[1]] == -1) res[now[0]][now[1]] = now[5];
+                    res[now[0]][now[1]] = Math.min(now[5], res[now[0]][now[1]]);
                     continue;
                 }
                 for(int k = 0;k<4;k++){
                     int ny = now[2] + dy[k];
                     int nx = now[3] + dx[k];
-                    if(OOB(ny, nx) || v[ny][nx][now[4]] || map[ny][nx] == 1 || res[now[0]][now[1]] != -1) continue;
+                    if(OOB(ny, nx) || v[ny][nx][now[4]] || map[ny][nx] == 1 ) continue;
                     v[ny][nx][now[4]] = true;
                     queue.add(new int[]{now[0],now[1], ny, nx,now[4], now[5]+1});
                 }
