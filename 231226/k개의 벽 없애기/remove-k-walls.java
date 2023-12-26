@@ -22,7 +22,7 @@ public class Main {
             }
         }
         stk = new StringTokenizer(bf.readLine());
-        sy = Integer.parseInt(stk.nextToken())-1;sy = Integer.parseInt(stk.nextToken())-1;
+        sy = Integer.parseInt(stk.nextToken())-1;sx = Integer.parseInt(stk.nextToken())-1;
         stk = new StringTokenizer(bf.readLine());
         ty = Integer.parseInt(stk.nextToken())-1;tx = Integer.parseInt(stk.nextToken())-1;
 
