@@ -11,10 +11,8 @@ public class Main{
 		dp[0] = 1;
 		dp[2] = 1;
 		dp[3] = 1;
-		for(int i = 2;i<=3;i++) {
-			for(int j = 4;j<=1000;j++) {
-				dp[j] += dp[j-i];
-			}
+		for(int i = 4;i<=n;i++) {
+			dp[i] = dp[i-2] + dp[i-3];
 		}
 		//System.out.println(Arrays.toString(dp));
 		System.out.print(dp[n] == 0 ? 0 : dp[n] % 10007);
