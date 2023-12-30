@@ -15,7 +15,7 @@ public class Main{
 		dp = new int[20];
 		Arrays.fill(dp, -1);
 		dfs(19);
-		System.out.print(dp[n]);
+		System.out.print(n == 1 ? 1 : dp[n]);
 	}
 	static int dfs(int n){
 		if(dp[n] != -1){
