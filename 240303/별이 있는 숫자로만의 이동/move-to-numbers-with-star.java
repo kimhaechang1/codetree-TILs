@@ -21,14 +21,13 @@ public class Main {
         int [][] s = new int[n+1][n+1];
         for(int i= 1;i<n+1;i++){
             for(int j = 1;j<n+1;j++){
+                // 일단 높이로 누적합 구하기
                 s[i][j] = s[i-1][j] + map[i][j];
             }
         }
         int max = Integer.MIN_VALUE;
         for(int i = 1;i<n+1;i++){
             for(int j= 1;j<n+1;j++){
-            	//System.out.println("=====================");
-            	//System.out.println(" i : "+ i +" j : "+ j);
                 int sum = 0;
                 // 왼쪽 영역
                 for(int off = 0; off<=k;off++){
@@ -46,7 +45,6 @@ public class Main {
                     if(sx >= n+1 || sx < 1){
                         continue;
                     }
-                    //System.out.println("왼쪽 sy : "+sy+" sx : "+sx +" ny : "+ny +" nx : "+nx);
                     sum += (s[ny][nx] - s[sy-1][sx]);
                 }
                 // 오른쪽 영역
@@ -62,7 +60,6 @@ public class Main {
                         ny = n;
                     }
                     if(sx >= n+1 || sx < 1) continue;
-                    //System.out.println("오른쪽 sy : "+sy+" sx : "+sx +" ny : "+ny +" nx : "+nx);
                     sum += (s[ny][nx] - s[sy-1][sx]);
                 }
                 // 중복되는 부분 빼주기
@@ -76,7 +73,6 @@ public class Main {
                 if(mny >= n+1){
                     mny = n;
                 }
-                //System.out.println("middle msy : "+ msy +" msx : "+msx +" mny : "+mny +" mnx : "+mnx);
                 sum -= (s[mny][mnx] - s[msy-1][msx]);
                 max = Math.max(max, sum);
             }
