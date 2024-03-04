@@ -13,8 +13,8 @@ public class Main {
             int value = 1;
             if(map.containsKey(key)){
                 value = map.get(key)+1;
-                max = Math.max(max, value);
             }
+            max = Math.max(max, value);
             map.put(key, value);
         }
         System.out.print(max);
