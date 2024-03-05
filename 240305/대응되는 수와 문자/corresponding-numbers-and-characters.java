@@ -10,21 +10,16 @@ public class Main {
         stk =new StringTokenizer(bf.readLine());
         n = Integer.parseInt(stk.nextToken());
         m = Integer.parseInt(stk.nextToken());
-        HashMap<Character, Integer> ctoi = new HashMap<>();
-        char [] itoc = new char[n+1];
+        HashMap<String, String> table = new HashMap<>();
         StringBuilder sb =new StringBuilder();
         for(int i = 1;i<n+1;i++){
-            char [] alpa = bf.readLine().toCharArray();
-            ctoi.put(alpa[0], i);
-            itoc[i] = alpa[0];
+            String alpa = bf.readLine();
+            table.put(alpa, String.valueOf(i));
+            table.put(String.valueOf(i), alpa);
         }
         while(m-- > 0){
-            char [] target= bf.readLine().toCharArray();
-            if(target[0] > 97 && target[0] < 123){
-                sb.append(ctoi.get(target[0])).append("\n");
-            }else{
-                sb.append(itoc[target[0]-'0']).append("\n");
-            }
+            String target= bf.readLine();
+            sb.append(table.get(target)).append("\n");
         }
         System.out.print(sb);
     }
