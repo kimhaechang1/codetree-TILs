@@ -17,33 +17,49 @@ public class Main {
         for(int i = 0;i<n;i++){
             int a = Integer.parseInt(stk.nextToken());
             key[i] = a;
-            if(map.containsKey(a)){
-                map.put(a, map.get(a)+1);
-            }else{
-                map.put(a, 1);
-            }
         }
         int left = 0;
-        int right = n-1;
+        int right = 1;
         Arrays.sort(key);
         int cnt = 0;
-//        System.out.println(Arrays.toString(key));
-//        for(Map.Entry<Integer, Integer> entryset : map.entrySet()) {
-//        	System.out.print("key : "+ entryset.getKey()+ " value : "+entryset.getValue()+" => ");
-//        }
-//        System.out.println();
-        while(left < right) {
-//        	System.out.println("left : "+left+" right : "+right);
-//        	System.out.println(" lval : "+key[left]+" rval : "+key[right]);
-        	long sum = key[left] + key[right];
-        	if(sum > k) {
-        		right--;
-        	}else if(sum == k) {
-        		left++;
-        		cnt += (map.get(key[left]) * map.get(key[right]));
-        	}else {
-        		left++;
-        	}
+        //System.out.println(Arrays.toString(key));
+        if(n < 2) {
+        	System.out.println(0);
+        }else {
+        	while(left < n) {
+            	//System.out.println("left : "+left+" right : "+right);
+            	//System.out.println(" lval : "+key[left]+" rval : "+key[right]);
+            	long sum = key[left] + key[right];
+            	if(sum > k) {
+            		left++;
+            		if(left + 1 < n) {
+            			right = left+1;
+            		}else {
+            			break;
+            		}
+            	}else if(sum == k) {
+            		right++;
+            		cnt += 1;
+//            		if(left + 1 < n) {
+//            			right = left+1;
+//            		}else {
+//            			break;
+//            		}
+            	}else {
+            		right++;
+            	}
+            	if(right == n) {
+            		if(sum <= k) {
+        				left++;
+        			}
+            		if(left + 1 < n) {	
+            			right = left+1;
+            		}else {
+            			break;
+            		}
+            	}
+            	
+            }
         }
         System.out.print(cnt);
     }
