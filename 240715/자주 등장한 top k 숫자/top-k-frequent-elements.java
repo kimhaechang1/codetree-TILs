@@ -37,7 +37,7 @@ public class Main {
 
         
         
-        while(!pq.isEmpty()){
+        while(k-- > 0 && !pq.isEmpty()){
             sb.append(pq.poll()).append(" ");
         }
         System.out.println(sb);
