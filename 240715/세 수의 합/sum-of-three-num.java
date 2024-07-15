@@ -29,7 +29,8 @@ public class Main {
         // 1 2 1 4 -1
         for(int i= 0;i<n;i++){
             // 지금 사용할 점에 대해서 사용했다고 표시를 남긴다.
-            
+            // 그리고 세 수가 j < i < diff 인 값을 찾는다. 
+            // 자연스럽게 중복이 제거되는 이유는 기준점 i를 기준으로 그 앞에 원소들은 전부 제거되기 때문
             if(map.containsKey(arr[i])){
                 map.put(arr[i], map.get(arr[i])-1);
             }
