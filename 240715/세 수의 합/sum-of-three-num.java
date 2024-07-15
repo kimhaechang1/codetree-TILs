@@ -32,8 +32,6 @@ public class Main {
             
             if(map.containsKey(arr[i])){
                 map.put(arr[i], map.get(arr[i])-1);
-            }else{
-                map.put(arr[i], -1);
             }
             for(int j= 0;j<i;j++){
                 int diff = k - arr[i] - arr[j];
