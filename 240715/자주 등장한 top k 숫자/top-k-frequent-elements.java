@@ -7,6 +7,20 @@ public class Main {
     static int k;
     static int [] arr;
     static HashMap<Integer, Integer> map;
+    static class Data implements Comparable<Data>{
+        int value;
+        int cnt;
+        public Data(int value, int cnt){
+            this.value = value;
+            this.cnt = cnt;
+        }
+        public int compareTo(Data o){
+            if(this.cnt == o.cnt){
+                return o.value - this.value;
+            }
+            return o.cnt - this.cnt;
+        }
+    }
     public static void main(String[] args) throws Exception{
         BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
         stk =new StringTokenizer(bf.readLine());
@@ -23,22 +37,16 @@ public class Main {
                 map.put(arr[i], 1);
             }
         }
-        int max = 1;
+        ArrayList<Data> list =new ArrayList<>();
         for(Map.Entry<Integer, Integer> entry: map.entrySet()){
-            max = Math.max(max, entry.getValue());
-        }
-        StringBuilder sb = new StringBuilder();
-        PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());
-        for(Map.Entry<Integer, Integer> entry: map.entrySet()){
-            if(max == entry.getValue()){
-                pq.add(entry.getKey());
-            }
+            list.add(new Data(entry.getKey(), entry.getValue()));
         }
 
-        
-        
-        while(k-- > 0 && !pq.isEmpty()){
-            sb.append(pq.poll()).append(" ");
+        Collections.sort(list, Collections.reverseOrder());
+        StringBuilder sb = new StringBuilder();
+        int idx = list.size()-1;
+        while(k-- > 0){
+            sb.append(list.get(idx--).value).append(" ");
         }
         System.out.println(sb);
     }
