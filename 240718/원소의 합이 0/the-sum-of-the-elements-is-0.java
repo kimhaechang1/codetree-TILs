@@ -19,6 +19,7 @@ public class Main {
         HashMap<Integer, Integer> cnt = new HashMap<>();
         for(int i= 0;i<n;i++){
             for(int j=0;j<n;j++){
+                
                 int s = (map[0][i] + map[1][j]);
                 cnt.put(s, cnt.get(s) == null ? 1 : cnt.get(s) + 1);
             }
@@ -36,18 +37,9 @@ public class Main {
             cnt.put(entry.getKey(), entry.getValue() - 1);
             int find = 0 + entry.getKey();
             if(cnt2.containsKey(find * -1)){
-                if(entry.getKey() == find){
-                    ans += (cnt2.get(find * -1) * cnt2.get(find * -1));
-                }else{
-                    ans += (cnt2.get(find * -1));
-                }
-                
+                ans += (cnt2.get(find * -1));
             }   
         }
         System.out.println(ans);
-        
-
-
-
     }
 }
