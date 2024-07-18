@@ -34,10 +34,9 @@ public class Main {
         int ans = 0;
         // 두 수의 합이 find가 되는 경우의수 
         for(Map.Entry<Integer, Integer> entry: cnt.entrySet()){
-            cnt.put(entry.getKey(), entry.getValue() - 1);
             int find = 0 + entry.getKey();
             if(cnt2.containsKey(find * -1)){
-                ans += (cnt2.get(find * -1));
+                ans += (cnt.get(find)) * (cnt2.get(find * -1));
             }   
         }
         System.out.println(ans);
