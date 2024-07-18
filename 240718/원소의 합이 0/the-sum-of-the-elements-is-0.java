@@ -15,7 +15,6 @@ public class Main {
                 map[i][j] = Integer.parseInt(stk.nextToken());
             }
         }
-        HashMap<Integer, Integer> cnt2 = new HashMap<>();
         HashMap<Integer, Integer> cnt = new HashMap<>();
         for(int i= 0;i<n;i++){
             for(int j=0;j<n;j++){
@@ -26,7 +25,7 @@ public class Main {
         for(int i= 0;i<n;i++){
             for(int j=0;j<n;j++){
                 int s = (map[2][i] + map[3][j]);
-                cnt2.put(s, cnt2.get(s) == null ? 1 : cnt2.get(s) + 1);
+                cnt.put(s, cnt.get(s) == null ? 1 : cnt.get(s) + 1);
             }
         }
         
@@ -35,11 +34,11 @@ public class Main {
         for(Map.Entry<Integer, Integer> entry: cnt.entrySet()){
             cnt.put(entry.getKey(), entry.getValue() - 1);
             int find = 0 + entry.getKey();
-            if(cnt2.containsKey(find * -1)){
-                ans += cnt2.get(find * -1);
+            if(cnt.containsKey(find * -1)){
+                ans += cnt.get(find * -1);
             }   
         }
-        System.out.println(ans);
+        System.out.println(ans / 2);
         
 
 
