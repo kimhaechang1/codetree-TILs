@@ -17,15 +17,18 @@ public class Main {
             arr[i] = Integer.parseInt(stk.nextToken());
         }
         int cnt = 0;
-        for(int i= 0;i<n-2;i++){
+        for(int i= 0;i<n-1;i++){
             // 수 하나 고정시켜놓고
             // 나머지 수들 중에서 2개를 뽑는 조합을 찾는다.
             // 이 때 고정수 기준으로 매번 새로운 조합인것을 연산에서 잊으면 안된다.
             HashMap<Integer, Integer> map = new HashMap<>();
+
+            // 아래는 두수의 합이 k - arr[i] 만큼이 되는 경우를 뽑는것
             int find = k - arr[i];
             for(int j= i+1;j<n;j++){
                 map.put(arr[j], map.get(arr[j]) == null ? 1 : map.get(arr[j]) + 1);
             }
+            
             for(int j = i+1;j<n;j++){
                 map.put(arr[j], map.get(arr[j])-1);
                 if(map.containsKey(find - arr[j])){
