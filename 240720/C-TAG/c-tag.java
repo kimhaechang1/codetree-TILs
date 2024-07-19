@@ -19,7 +19,7 @@ public class Main {
         for(int i = 0;i<m-2;i++){
             for(int j = i+1;j<m-1;j++){
                 for(int k = j+1;k<m;k++){
-                    if(go(new int[]{i, j, k})){
+                    if(go(i, j, k)){
                         cnt++;
                     }
                     
@@ -28,21 +28,17 @@ public class Main {
         }
         System.out.print(cnt);
     }
-    static boolean go(int[] idxs){
+    static boolean go(int idx1, int idx2, int idx3){
         HashSet<String> aSet = new HashSet<>();
         for(int i = 0;i<n;i++){
             StringBuilder sb = new StringBuilder();
-            for(int idx: idxs){ 
-                sb.append(map[i][idx]);
-            }
+            sb.append(map[i][idx1]).append(map[i][idx2]).append(map[i][idx3]);
             aSet.add(sb.toString());
         }
 
         for(int i = n;i<n * 2;i++){
             StringBuilder sb = new StringBuilder();
-            for(int idx: idxs){ 
-                sb.append(map[i][idx]);
-            }
+            sb.append(map[i][idx1]).append(map[i][idx2]).append(map[i][idx3]);
             if(aSet.contains(sb.toString())){
                 return false;
             }
