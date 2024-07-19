@@ -6,13 +6,15 @@ public class Main {
     static StringTokenizer stk;
     static int n;
     static int m;
+    static int total;
     public static void main(String[] args) throws Exception{
         BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
         stk = new StringTokenizer(bf.readLine());
         n = Integer.parseInt(stk.nextToken());
         m = Integer.parseInt(stk.nextToken());
-        map = new char[2 * n][m];
-        for(int i = 0;i<2 * n;i++){
+        total = n * 2;
+        map = new char[total][m];
+        for(int i = 0;i<total;i++){
             map[i] = bf.readLine().toCharArray();
         }
         int cnt = 0;
@@ -36,7 +38,7 @@ public class Main {
             aSet.add(sb.toString());
         }
 
-        for(int i = n;i<n * 2;i++){
+        for(int i = n;i<total;i++){
             StringBuilder sb = new StringBuilder();
             sb.append(map[i][idx1]).append(map[i][idx2]).append(map[i][idx3]);
             if(aSet.contains(sb.toString())){
