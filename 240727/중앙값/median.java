@@ -35,8 +35,12 @@ public class Main {
                     if(max.peek() <= arr[cnt-1]){
                         max.add(arr[cnt-1]);
                     }else {
-                        max.add(min.poll());
-                        min.add(arr[cnt-1]);
+                        if(min.peek() < arr[cnt-1]){
+                            max.add(arr[cnt-1]);
+                        }else{
+                            max.add(min.poll());
+                            min.add(arr[cnt-1]);
+                        }
                     }
                 }
                 // System.out.println("minSize: "+min.size()+" maxSize: "+max.size());
