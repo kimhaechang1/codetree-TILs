@@ -33,21 +33,24 @@ public class Main {
         int ans = 0;
         int pTime = info[0][0] + info[0][1];
         int ptr = 1;
-        for(;ptr<n;){
+        while(ptr < n){
             while(ptr < n && info[ptr][0] < pTime){
-                pq.add(new int[]{info[ptr][0], info[ptr][1], info[ptr][2]});
+                pq.add(new int[]{ info[ptr][0], info[ptr][1], info[ptr][2] });
                 ptr++;
             }
-            while(!pq.isEmpty()){
+            if(!pq.isEmpty()){
                 int[] now = pq.poll();
-                ans = Math.max(ans, (pTime - now[0]));
+                int cha = pTime - now[0];
+                ans = Math.max(ans, cha);
                 pTime += now[1];
+                continue;
             }
-
             if(ptr < n && info[ptr][0] >= pTime){
-                pTime = info[ptr][0] + info[ptr][1];
+                pTime = info[ptr][0];
+                pTime += info[ptr][1];
+                ptr++;
             }
-            ptr++;
+            
         }
         System.out.println(ans);
     }
