@@ -39,7 +39,7 @@ public class Main {
         }
 
         if(y == n-1 && x == n-1){
-            return map[n-1][n-1];
+            return dp[n-1][n-1] = map[n-1][n-1];
         }
         dp[y][x] = map[y][x];
         int value = 0;
