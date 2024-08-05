@@ -18,45 +18,28 @@ public class Main {
             }
         }
 
-        // 오른쪽 혹은 아래로만 이동하여 우하 끝점에 도달할동안 최솟값의 최대
-        // 최솟값의 최대는 즉, 하한경계를 하나 정하고 도달가능한지 검사
+        // DP로 어떻게 해결할 수 있는가?
+        // 최소들 중 최대값은 즉, 경로상에 최소값들 끼리 경쟁해서 최대를 구하란 이야기가 된다.
+        // 결국 어떤 지점 i, j로 올 수있는 방법은 현재 문제에서 i-1,j 혹은 i, j-1이 되는데
+        // 이 때 각각의 최솟값들 중 최대를 선택하는것이 중요하다. 왜냐하면 그래야 "경로상의 최대" 가 되니까
+        // 추가적으로 그럼 map[i][j]는 어떻게 비교 할 것인가? 해당 땅을 밟기 위한 조건만 갖추면된다. 즉, 지금까지의 최소이자 최대보다도 더 작다면 갱신인 셈
 
-        int s = 0;
-        int e = 1_000_000;
-        int ans = e;
-        while(s <= e){
-            int mid = (s + e) / 2;
-            if(go(mid)){
-                s = mid + 1;
-            }else{
-                e = mid - 1;
-                ans = Math.min(e, ans);
+        int[][] dp =  new int[n][n];
+        dp[0][0] = map[0][0];
+        for(int i = 1;i<n;i++)
+            dp[0][i] = Math.min(map[0][i], dp[0][i-1]);
+
+        for(int i = 1;i<n;i++)
+            dp[i][0] = Math.min(map[i][0], dp[i-1][0]);
+        
+        for(int i = 1;i<n;i++){
+            for(int j= 1;j<n;j++){
+                dp[i][j] = map[i][j];
+                dp[i][j] = Math.min(Math.max(dp[i-1][j], dp[i][j-1]), dp[i][j]);
             }
         }
-        System.out.println(ans);
-    }
-    static boolean go(int value){
-        Queue<int[]> queue =new ArrayDeque<>();
-        if(map[0][0] < value) return false;
-        boolean[][] v = new boolean[n][n];
-        v[0][0] = true;
-        queue.add(new int[]{0,0});
-        while(!queue.isEmpty()){
-            int[] now = queue.poll();
-            if(now[0] == n-1 && now[1] == n-1){
-                return true;
-            }
-            for(int dir = 0;dir<2;dir++){
-                int ny = now[0] + dy[dir];
-                int nx = now[1] + dx[dir];
-                if(OOB(ny, nx) || v[ny][nx] || map[ny][nx] < value) continue;
-                v[ny][nx] = true;
-                queue.add(new int[]{ny, nx});
-            }
-        }
-        return false;
-    }
-    static boolean OOB(int y, int x){
-        return y >= n || y < 0 || x >=n || x < 0;
+
+        System.out.println(dp[n-1][n-1]);
+
     }
 }
