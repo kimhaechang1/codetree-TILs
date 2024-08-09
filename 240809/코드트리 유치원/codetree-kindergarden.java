@@ -18,6 +18,7 @@ public class Main {
             this.val = val;
         }
     }
+    static Node[] nodePool = new Node[100_005];
     static class LinkedList{
         Node head;
         Node tail;
@@ -25,24 +26,15 @@ public class Main {
         public LinkedList(int init){
             head = new Node();
             tail = new Node();
-            Node newNode = new Node(init);
+            Node newNode = nodePool[init];
             head.next = newNode;
             newNode.next = tail;
             tail.prev = newNode;
             newNode.prev = head;
         }
 
-        public Node find(int findVal){
-            for(Node nxt = this.head.next; nxt != null; nxt = nxt.next){
-                if(nxt.val == findVal){
-                    return nxt;
-                }
-            }
-            return null;
-        }
-
         public void addFront(int findVal, int cnt){
-            Node target = find(findVal);
+            Node target = nodePool[findVal];
             Node tp = target.prev;
             LinkedList unlinked = makeNodes(cnt);
             target.prev = unlinked.tail.prev;
@@ -52,7 +44,7 @@ public class Main {
         }
 
         public void addBack(int findVal, int cnt){
-            Node target = find(findVal);
+            Node target = nodePool[findVal];
             Node tn = target.next;
             LinkedList unlinked = makeNodes(cnt);
             target.next = unlinked.head.next;
@@ -65,7 +57,7 @@ public class Main {
             LinkedList linked = new LinkedList(idx++);
             for(int i = 0;i<cnt-1;i++){
                 Node tp = linked.tail.prev;
-                Node newNode = new Node(idx++);
+                Node newNode = nodePool[idx++];
                 linked.tail.prev = newNode;
                 newNode.prev = tp;
                 tp.next = newNode;
@@ -78,12 +70,22 @@ public class Main {
     }
     static LinkedList list;
     static StringBuilder sb;
+    static void init(){
+        for(int i= 0;i<nodePool.length;i++){
+            nodePool[i] = new Node(i);
+        }
+        for(int i= 0;i<nodePool.length-1;i++){
+            Node now = nodePool[i];
+            Node next = nodePool[i+1];
+        }
+        sb = new StringBuilder();
+        list = new LinkedList(1);
+        idx = 2;
+    }
     public static void main(String[] args) throws Exception{
         BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
         q = Integer.parseInt(bf.readLine());
-        idx = 2;
-        list = new LinkedList(1);
-        sb = new StringBuilder();
+        init();
         while(q-- > 0){
             stk = new StringTokenizer(bf.readLine());
             int query = Integer.parseInt(stk.nextToken());
@@ -115,8 +117,8 @@ public class Main {
         list.addFront(sIdx, cnt);
     }
     static void doThree(int sIdx){
-        Node node = list.find(sIdx);
-        if(node.prev == list.head || node.next == list.tail){
+        Node node = nodePool[sIdx];
+        if(node.prev == null || node.prev == list.head || node.next == null || node.next == list.tail){
             sb.append(-1).append("\n");
             return;
         }
