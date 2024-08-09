@@ -74,10 +74,6 @@ public class Main {
         for(int i= 0;i<nodePool.length;i++){
             nodePool[i] = new Node(i);
         }
-        for(int i= 0;i<nodePool.length-1;i++){
-            Node now = nodePool[i];
-            Node next = nodePool[i+1];
-        }
         sb = new StringBuilder();
         list = new LinkedList(1);
         idx = 2;
