@@ -13,22 +13,20 @@ public class Main {
         q = Integer.parseInt(stk.nextToken());
         
         points = new int[n];
-        lines = new int[q][2];
+
         stk = new StringTokenizer(bf.readLine());
-        
+        TreeSet<Integer> pointCnt = new TreeSet<>();
         for(int i= 0;i<n;i++){
             points[i] = Integer.parseInt(stk.nextToken());
+            pointCnt.add(points[i]);
         }
 
         // -3까지 1, 5까지 2, 9까지 3
-        Arrays.sort(points);
-        
-        TreeMap<Integer, Integer> pointCnt = new TreeMap<>();
 
         int cnt = 1;
-
+        HashMap<Integer, Integer> hashMap = new HashMap<>();
         for(int point: points){
-            pointCnt.put(point, cnt++);
+            hashMap.put(pointCnt.pollFirst(), cnt++);
         }
 
         StringBuilder sb = new StringBuilder();
@@ -36,10 +34,7 @@ public class Main {
             stk = new StringTokenizer(bf.readLine());
             int s = Integer.parseInt(stk.nextToken());
             int e = Integer.parseInt(stk.nextToken());
-
-            int under = pointCnt.get(pointCnt.floorKey(s));
-            int upper = pointCnt.get(pointCnt.ceilingKey(e));
-            sb.append(upper - under + 1).append("\n");
+            sb.append(hashMap.get(e) - hashMap.get(s) + 1).append("\n");
         }
         System.out.print(sb);
     }
