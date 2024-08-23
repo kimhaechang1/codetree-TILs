@@ -19,14 +19,11 @@ public class Main {
 
         TreeMap<Integer, Integer> resultMap = new TreeMap<>();
         int sum = 0;
+        int max = 0;
         for(int x: treeMap.keySet()) {
             sum += treeMap.get(x);
             resultMap.put(x, sum);
-        }
-
-        int max = -1;
-        for(int x: resultMap.keySet()) {
-            max = Math.max(max, resultMap.get(x));
+            max = Math.max(sum, max);
         }
         System.out.print(max);
     }
