@@ -15,7 +15,7 @@ public class Main {
         }
         
         long sum = 0;
-        long max = 0;
+        long max = Long.MIN_VALUE;
         int idx = 0;
         while(idx < n) {
             if(sum + arr[idx] < 0) {
