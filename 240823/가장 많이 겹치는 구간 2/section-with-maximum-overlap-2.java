@@ -28,12 +28,6 @@ public class Main {
         for(int x: resultMap.keySet()) {
             max = Math.max(max, resultMap.get(x));
         }
-        int cnt = 0;
-        for(int x: resultMap.keySet()) {
-            if(max == resultMap.get(x)) {
-                cnt++;
-            }
-        }
-        System.out.print(cnt);
+        System.out.print(max);
     }
 }
