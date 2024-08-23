@@ -18,9 +18,9 @@ public class Main {
         long max = Long.MIN_VALUE;
         int idx = 0;
         while(idx < n) {
-            if(sum + arr[idx] <= 0) {
+            if(sum + arr[idx] < arr[idx]) {
                 sum = arr[idx];
-            } else {
+            } else { 
                 sum += arr[idx];
             }
             max = Math.max(max, sum);
