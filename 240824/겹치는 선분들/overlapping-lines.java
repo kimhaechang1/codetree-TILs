@@ -20,7 +20,7 @@ public class Main {
             switch(dir) {
                 case "R":
                     treeMap.put(prev, treeMap.get(prev) == null ? 1 : treeMap.get(prev) + 1);
-                    treeMap.put(prev + s, treeMap.get(prev + s) == null ? -1 : treeMap.get(prev+s+1) - 1);
+                    treeMap.put(prev + s, treeMap.get(prev + s) == null ? -1 : treeMap.get(prev+s) - 1);
                     prev = prev + s;
                     break;
                 case "L":
