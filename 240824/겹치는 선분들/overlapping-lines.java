@@ -41,7 +41,7 @@ public class Main {
         for(int x: resultMap.keySet()) {
             if(p == Integer.MIN_VALUE && resultMap.get(x) >= m) {
                 p = x;
-            } else if(p != -1 && resultMap.get(x) < m) {
+            } else if(p != Integer.MIN_VALUE && resultMap.get(x) < m) {
                 ans += ((x-1) - p);
                 p = Integer.MIN_VALUE;
             }
