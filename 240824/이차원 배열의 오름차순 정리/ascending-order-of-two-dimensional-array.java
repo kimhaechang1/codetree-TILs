@@ -2,7 +2,7 @@ import java.util.*;
 import java.io.*;
 
 public class Main {
-    static int n,k;
+    static long n,k;
     public static void main(String[] args) throws Exception{
         BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
         n = Integer.parseInt(bf.readLine());
