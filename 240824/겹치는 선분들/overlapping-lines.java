@@ -20,12 +20,12 @@ public class Main {
             switch(dir) {
                 case "R":
                     treeMap.put(prev, treeMap.get(prev) == null ? 1 : treeMap.get(prev) + 1);
-                    treeMap.put(prev + s + 1, treeMap.get(prev + s + 1) == null ? -1 : treeMap.get(prev+s+1) - 1);
+                    treeMap.put(prev + s, treeMap.get(prev + s) == null ? -1 : treeMap.get(prev+s+1) - 1);
                     prev = prev + s;
                     break;
                 case "L":
                     treeMap.put(prev - s, treeMap.get(prev - s) == null ? 1 : treeMap.get(prev - s) + 1);
-                    treeMap.put(prev + 1, treeMap.get(prev + 1) == null ? -1 : treeMap.get(prev+1) - 1);
+                    treeMap.put(prev, treeMap.get(prev) == null ? -1 : treeMap.get(prev) - 1);
                     prev = prev - s;
                     break;
             }
@@ -41,8 +41,8 @@ public class Main {
         for(int x: resultMap.keySet()) {
             if(p == Integer.MIN_VALUE && resultMap.get(x) >= m) {
                 p = x;
-            } else if(p != Integer.MIN_VALUE && resultMap.get(x) < m) {
-                ans += ((x-1) - p);
+            } else if (p != Integer.MIN_VALUE && resultMap.get(x) < m) {
+                ans += (x - p);
                 p = Integer.MIN_VALUE;
             }
         }
