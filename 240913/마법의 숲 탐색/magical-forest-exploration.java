@@ -58,75 +58,42 @@ public class Main {
         for(int i = 0;i<info.length;i++) {
             rData[i] = new Data(-2, info[i][0]-1, dirCon(info[i][1]));
             while(go(i));
-            //System.out.println("y: "+rData[i].y+" x: "+rData[i].x);
-            //boolean canFix = pin(i);
-            //System.out.println("canFix: "+canFix);
             if (!pin(i)) {
                 map = new int[n][m];
                 continue;
             }
-            //printMap();
-            //System.out.println("###########");
-            cnt++;
-            /*if(cnt == 4) {
-                break;
-            }*/
-            
             gogo(i);
         }
         System.out.print(answer);
-    }
-    static void printMap() {
-        for(int i = 0;i<n;i++) {
-            for(int j = 0;j<m;j++) {
-                System.out.print(map[i][j]+" ");
-            }
-            System.out.println();
-        }
     }
     static boolean go(int rIdx) {
         // 남쪽으로 이동이 가능한지 체크
         Data now = rData[rIdx];
         
         if (goDown(now)) {
-            //System.out.println("아래로 호출됨!");
             return true;
         }
         // 왼쪽 회전 후 아래로 내려가는것이 가능한지 체크
         if (goLeftAndDown(now)) {
-            //System.out.println("왼쪽으로 구름 호출됨!");
             return true;
         }
         // 오른쪽 회전 후 아래로 내려가는것이 가능한지 체크
         if (goRightAndDown(now)) {
-            //System.out.println("오른쪽으로 구름 호출됨!");
             return true;
         }
         return false;
     }
     static boolean goDown(Data now) {
-        // 왼팔
-        int ly = now.y + dy[2]; 
-        int lx = now.x + dx[2];
-        // 오른팔
-        int ry = now.y + dy[3]; 
-        int rx = now.x + dx[3];
-        // 다리
-        int ddy = now.y + dy[1]; 
-        int ddx = now.x + dx[1];
-
-        int lly = ly + dy[1];
-        int llx = lx + dx[1];
-        int rry = ry + dy[1];
-        int rrx = rx + dx[1];
-        int dddy = ddy + dy[1];
-        int dddx = ddx + dx[1];
-        //System.out.println("다리: "+dddy+" "+dddx);
-
-        if(OOB(lly, llx) || OOB(rry, rrx) || OOB(dddy, dddx)) return false;
-        if(lly >= 0 && map[lly][llx] != 0) return false;
-        if(rry >= 0 && map[rry][rrx] != 0) return false;
-        if(dddy >= 0 && map[dddy][dddx] != 0) return false;
+        int y = now.y;
+        int x = now.x;
+        int ny = now.y + dy[1];
+        int nx = now.x + dx[1];
+        for(int dir = 0;dir<4;dir++) {
+            int ndy = ny + dy[dir];
+            int ndx = nx + dx[dir];
+            if(OOB(ndy, ndx)) return false;
+            if(ndy >= 0 && map[ndy][ndx] != 0) return false;
+        }
         now.y += 1;
         return true;
     }   
