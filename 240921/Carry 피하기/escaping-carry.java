@@ -7,12 +7,16 @@ public class Main {
     static int[][] numbers;
     static boolean[] v;
     static int max;
+    static ArrayDeque<Integer> aDeq;
+    static ArrayDeque<Integer> bDeq;
     public static void main(String[] args) throws Exception{
         BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
         n = Integer.parseInt(bf.readLine());
         nums= new int[n];
         v = new boolean[n];
         numbers = new int[n][9];
+        aDeq = new ArrayDeque<>();
+        bDeq = new ArrayDeque<>();
         for(int i = 0;i<n;i++) {
             String n = bf.readLine();
             nums[i] = Integer.parseInt(n);
@@ -25,34 +29,54 @@ public class Main {
 
         for(int i =0;i<n;i++) {
             v[i] = true;
-            dfs(numbers[i], v, 1);
+            dfs(nums[i], v, 1);
             v[i] = false;
         }
         System.out.println(max);
     }
-    static void dfs(int[] present, boolean[] selected, int cnt) {
+    static void dfs(int pSum, boolean[] selected, int cnt) {
         for(int i = 0;i<n;i++) {
             if(selected[i]) continue;
-            if(check(present, numbers[i])) {
-                int[] res = sum(present, numbers[i]);
+            if(check(pSum, i)) {
+                pSum += nums[i];
                 selected[i] = true;
                 max = Math.max(cnt+1, max);
-                dfs(res, selected, cnt+1);
+                dfs(pSum, selected, cnt+1);
                 selected[i] = false;
+                pSum -= nums[i];
             }
         }
     }
-    static int[] sum(int[] present, int[] select) {
-        int[] result = new int[9];
-        for(int i = 0;i<9;i++) {
-            result[i] = present[i] + select[i];
+    
+    static boolean check(int pSum, int sIdx) {
+        String pStr = String.valueOf(pSum);
+        String sStr = String.valueOf(nums[sIdx]);
+        for(int i = 0;i<pStr.length();i++) {
+            aDeq.addLast(pStr.charAt(i)-'0');
         }
-        return result;
-    }
-    static boolean check(int[] present, int[] select) {
-        int[] res = sum(present, select);
-        for(int i= 0;i<9;i++) {
-            if (res[i] >= 10) return false;
+        for(int i = 0;i<sStr.length();i++) {
+            bDeq.addLast(sStr.charAt(i)-'0');
+        }
+        while(!aDeq.isEmpty() && !bDeq.isEmpty()) {
+            int a= aDeq.peekLast();
+            int b= bDeq.peekLast();
+            if ( a + b >= 10 ) {
+                if(!aDeq.isEmpty()) {
+                    aDeq.clear();
+                }
+                if(!bDeq.isEmpty()) {
+                    bDeq.clear();
+                }
+                return false;
+            }
+            aDeq.pollLast();
+            bDeq.pollLast();
+        }
+        if(!aDeq.isEmpty()) {
+            aDeq.clear();
+        }
+        if(!bDeq.isEmpty()) {
+            bDeq.clear();
         }
         return true;
     }
