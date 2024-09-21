@@ -25,21 +25,23 @@ public class Main {
             }
         }
         max = 1;
-        
-
-        for(int i =0;i<n;i++) {
-            v[i] = true;
-            dfs(nums[i], v, 1);
-            v[i] = false;
-        }
+        dfs(0, v, 0);
         System.out.println(max);
     }
     static void dfs(int pSum, boolean[] selected, int cnt) {
         for(int i = 0;i<n;i++) {
             if(selected[i]) continue;
-            if(check(pSum, i)) {
-                pSum += nums[i];
+            if(pSum == 0) {
                 selected[i] = true;
+                pSum += nums[i];
+                max = Math.max(cnt+1, max);
+                dfs(pSum, selected, cnt+1);
+                selected[i] = false;
+                pSum -= nums[i];
+            }
+            if(check(pSum, i)) {
+                selected[i] = true;
+                pSum += nums[i];
                 max = Math.max(cnt+1, max);
                 dfs(pSum, selected, cnt+1);
                 selected[i] = false;
