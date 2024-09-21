@@ -5,7 +5,6 @@ public class Main {
     static int n;
     static int[] nums;
     static int[][] numbers;
-    static boolean[] v;
     static int max;
     public static void main(String[] args) throws Exception{
         BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
@@ -17,7 +16,6 @@ public class Main {
         }
         max = 1;
         // 조합인데 개수가 지정이 안되있다 -> 부분집합
-        //
         dfs(0, 0, 0);
         System.out.println(max);
     }
