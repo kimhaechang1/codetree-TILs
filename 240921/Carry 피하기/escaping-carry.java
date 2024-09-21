@@ -27,7 +27,7 @@ public class Main {
         for(int i = depth;i<n;i++) {
             if(can(sum, i)) {
                 max = Math.max(cnt+1, max);
-                dfs(depth+1, cnt+1, sum+nums[i]);
+                dfs(i+1, cnt+1, sum+nums[i]);
             }
         }
     }
