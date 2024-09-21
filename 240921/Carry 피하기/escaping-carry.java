@@ -4,13 +4,11 @@ import java.io.*;
 public class Main {
     static int n;
     static int[] nums;
-    static int[][] numbers;
     static int max;
     public static void main(String[] args) throws Exception{
         BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
         n = Integer.parseInt(bf.readLine());
         nums= new int[n];
-        v = new boolean[n];
         for(int i = 0;i<n;i++) {
             nums[i] = Integer.parseInt(bf.readLine());
         }
