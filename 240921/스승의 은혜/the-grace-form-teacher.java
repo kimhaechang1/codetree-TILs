@@ -59,6 +59,7 @@ public class Main {
                     cnt++;
                     prev = drr[i].p / 2;
                 }
+                break;
             }
         }
         System.out.println(cnt);
