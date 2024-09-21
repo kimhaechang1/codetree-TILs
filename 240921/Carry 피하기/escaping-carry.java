@@ -16,6 +16,8 @@ public class Main {
             nums[i] = Integer.parseInt(bf.readLine());
         }
         max = 1;
+        // 조합인데 개수가 지정이 안되있다 -> 부분집합
+        //
         dfs(0, 0, 0);
         System.out.println(max);
     }
@@ -24,11 +26,13 @@ public class Main {
             return;
         }
 
-        for(int i = depth;i<n;i++) {
-            if(can(sum, i)) {
-                max = Math.max(cnt+1, max);
-                dfs(i+1, cnt+1, sum+nums[i]);
-            }
+        max = Math.max(cnt, max);
+        dfs(depth+1, cnt, sum);
+
+        
+        if(can(sum, depth)) {
+            max = Math.max(cnt+1, max);
+            dfs(depth+1, cnt+1, sum + nums[depth]);
         }
     }
     static boolean can(int sum, int idx) {
