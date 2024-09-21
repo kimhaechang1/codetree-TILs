@@ -17,6 +17,9 @@ public class Main {
             this.s = s;
             this.total = p + s;
         }
+        public String toString() {
+            return "[p: "+p+", s: "+s+" total: "+total+"]";
+        }
     }
     static Data[] drr;
     public static void main(String[] args) throws Exception{
@@ -46,6 +49,7 @@ public class Main {
         for(int i = 0;i<n;i++) {
             if (sum + drr[i].total <= b) {
                 sum += drr[i].total;
+                //System.out.println("select: "+drr[i]);
                 cnt++;
             } else {
                 boolean canGo = false;
@@ -53,6 +57,7 @@ public class Main {
                     if ((sum - drr[j].total) + prev + (drr[j].p / 2 + drr[j].s) + drr[i].total <= b) {
                         cnt++;
                         prev = drr[j].p / 2;
+                        sum = sum - drr[j].total + prev + (drr[j].p / 2 + drr[j].s) + drr[i].total;
                         canGo = true;
                         break;
                     } 
@@ -60,6 +65,7 @@ public class Main {
                 if(!canGo && sum + prev + (drr[i].p / 2 + drr[i].s) <= b) {
                     cnt++;
                     prev = drr[i].p / 2;
+                    sum += (drr[i].p / 2 + drr[i].s);
                     canGo = true;
                 }
                 if(!canGo) {
