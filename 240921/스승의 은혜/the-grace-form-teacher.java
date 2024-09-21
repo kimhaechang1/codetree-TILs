@@ -37,7 +37,7 @@ public class Main {
         long sum = 0;
         Arrays.sort(drr, (a, b)-> {
             if(a.total == b.total) {
-                return Long.compare(a.s, b.s);
+                return Long.compare(a.p, b.p);
             }
             return Long.compare(a.total, b.total);
         });
@@ -48,18 +48,24 @@ public class Main {
                 sum += drr[i].total;
                 cnt++;
             } else {
+                boolean canGo = false;
                 for(int j = 0;j<i;j++) {
                     if ((sum - drr[j].total) + prev + (drr[j].p / 2 + drr[j].s) + drr[i].total <= b) {
                         cnt++;
                         prev = drr[j].p / 2;
+                        canGo = true;
                         break;
                     } 
                 }
-                if(sum + prev + (drr[i].p / 2 + drr[i].s) <= b) {
+                if(!canGo && sum + prev + (drr[i].p / 2 + drr[i].s) <= b) {
                     cnt++;
                     prev = drr[i].p / 2;
+                    canGo = true;
                 }
-                break;
+                if(!canGo) {
+                    break;
+                }
+                
             }
         }
         System.out.println(cnt);
