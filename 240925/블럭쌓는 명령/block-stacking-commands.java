@@ -34,13 +34,12 @@ public class Main {
         }
         ArrayList<Integer> list = new ArrayList<>();
         for(int i = 1;i<=n;i++) {
-            if (lineMap.get(i) == null) {
+            if (lineMap.floorKey(i) == null) {
                 list.add(0);
             } else {
-                list.add(lineMap.get(i));
+                list.add(lineMap.get(lineMap.floorKey(i)));
             }
         }
-
         Collections.sort(list);
         System.out.println(list.get(list.size() / 2));
         
