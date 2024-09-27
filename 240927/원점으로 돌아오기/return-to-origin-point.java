@@ -25,7 +25,15 @@ public class Main {
     }
     static void dfs(int y, int x, boolean[] v, int pDir, int cnt) {
         if (cnt == n) {
-            c++;
+            if (y == 0 && x < 0 && pDir != 3) {
+                c++;
+            } else if (y == 0 && x > 0 && pDir != 2) {
+                c++;
+            } else if (y < 0 && x == 0 && pDir != 1) {
+                c++;
+            } else if (y > 0 && x  == 0 && pDir != 0){
+                c++;
+            }
             return;
         }
 
