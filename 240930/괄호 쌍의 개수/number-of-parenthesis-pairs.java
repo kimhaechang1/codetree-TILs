@@ -33,15 +33,16 @@ public class Main {
         // 그 바뀐부분 기준으로 왼쪽은 신경을 덜받고 포함한 오른쪽은 영향을 받는데,,
         // 그 행동 후 계속해서 접두사가 오픈이 클로즈 이상이어야 정답 카운팅이 됨
 
-
         for(int i = 0;i<n;i++) {
             if (brackets[i] == '(') {
                 if (oSum[n-1] - 1 != cSum[n-1] + 1) continue;
+                if (i > 0 && oSum[i-1] < cSum[i-1]) break;
                 if (check(i)) {
                     cnt++;
                 }
             } else {
                 if (oSum[n-1] + 1 != cSum[n-1] - 1) continue;
+                if (i > 0 && oSum[i-1] < cSum[i-1]) break;
                 if (check(i)) {
                     cnt++;
                 }
@@ -51,9 +52,9 @@ public class Main {
     }
     static boolean check(int idx) {
         boolean isCan = true;
-        for(int i = 0;i<idx;i++) {
+        /*for(int i = 0;i<idx;i++) {
             if(oSum[i] < cSum[i]) return false;
-        }
+        }*/
         int oOffset = brackets[idx] == '(' ? -1 : 1;
         int cOffset = brackets[idx] == '(' ? 1 : -1;
         for(int i = idx;i<n;i++) {
