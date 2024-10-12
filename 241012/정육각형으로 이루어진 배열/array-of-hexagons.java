@@ -16,7 +16,7 @@ public class Main {
         stk = new StringTokenizer(bf.readLine());  
         n = Integer.parseInt(stk.nextToken());
         m = Integer.parseInt(stk.nextToken());
-        map = new int[n+1][m+1];
+        map = new int[n+2][m+2];
         
         for(int i = 1;i<n+1;i++) {
             stk = new StringTokenizer(bf.readLine());
@@ -33,15 +33,17 @@ public class Main {
         // 왼쪽 위 y만 감소, 오른쪽 위는 y감소 x증가
         // 왼쪽 아래는 y만 증가, 오른쪽 아래는 y증가 x증가
         int ans= 0;
-        v = new boolean[n+1][m+1];
-        for(int i = 0;i<n+1;i++) {
-            for(int j = 0;j<m+1;j++) {
+        v = new boolean[n+2][m+2];
+        for(int i = 0;i<n+2;i++) {
+            for(int j = 0;j<m+2;j++) {
                 if(v[i][j] || map[i][j] == 1) continue;
                 v[i][j] = true;
                 ans += bfs(i, j);
+                System.out.print(ans);
+                return;
             }
         }
-        System.out.print(ans);
+        
     }
     static int bfs(int sy, int sx){
         Queue<int[]> queue = new ArrayDeque<>();
@@ -57,7 +59,6 @@ public class Main {
                     int nx= now[1] + d1x[dir];
                     if(OOB(ny, nx) || v[ny][nx]) continue;
                     if(map[ny][nx] == 1) {
-                        System.out.println(Arrays.toString(now));
                         result++;
                     } else {
                         v[ny][nx] = true;
@@ -71,7 +72,6 @@ public class Main {
                     int nx= now[1] + d2x[dir];
                     if(OOB(ny, nx) || v[ny][nx]) continue;
                     if(map[ny][nx] == 1) {
-                        System.out.println(Arrays.toString(now));
                         result++;
                     } else {
                         v[ny][nx] = true;
@@ -83,6 +83,6 @@ public class Main {
         return result;
     }
     static boolean OOB(int y, int x) {
-        return y >= n+1 || y < 1 || x >= m +1 || x < 1;
+        return y > n+1 || y < 0 || x > m +1 || x < 0;
     }
 }
