@@ -4,8 +4,8 @@ import java.io.*;
 public class Main {
 
     static int n;
-    static int[] arr;
-    static int[] cost;
+    static long[] arr;
+    static long[] cost;
     static BufferedReader bf;
     static StringTokenizer stk;
 
@@ -27,8 +27,8 @@ public class Main {
     void input() throws Exception {
 
         n = Integer.parseInt(bf.readLine());
-        arr = new int[n];
-        cost = new int[n - 1];
+        arr = new long[n];
+        cost = new long[n - 1];
         stk = new StringTokenizer(bf.readLine());
         for(int i = 0; i < n - 1; i++) {
             cost[i] = Integer.parseInt(stk.nextToken());
@@ -55,7 +55,7 @@ public class Main {
         // 애초에 이전 최솟값인 스테이션에서 총합을 계산하는것과 누적 최솟값은 변화가 없기 때문이다.
         // 이것이 가능한 이유는 반드시 한칸씩만 이동하기 때문이다.
 
-        int[] minStation = new int[n];
+        long[] minStation = new long[n];
         minStation[0] = arr[0];
         for(int i = 1;i < n; i++) minStation[i] = Math.min(minStation[i - 1], arr[i]);
         long answer = 0;
