@@ -46,14 +46,12 @@ public class Main {
         long sum = 0;
         for(int i = 0; i < n; i++) {
             sum += arr[i];
-            if (i == 0 || arr[i] != 0) {
-                if (sum >= 7) {
-                    long m = sum % 7;
-                    if (m == 0) {
-                        answer = i + 1;
-                    } else if (map.containsKey(m)) {
-                        answer = Math.max(answer, i - map.get(m));
-                    }
+            if (sum >= 7) {
+                long m = sum % 7;
+                if (m == 0) {
+                    answer = i + 1;
+                } else if (map.containsKey(m)) {
+                    answer = Math.max(answer, i - map.get(m));
                 }
             }
             map.put(sum, i);
