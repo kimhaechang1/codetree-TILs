@@ -41,21 +41,19 @@ public class Main {
         // 이렇게 만든 그룹중에서 최대 크기를 구하시오
         
         // 어짜피 연속되는 합이면서, 음수가 없기 때문에 무조건 오른쪽으로 더할수록 계속 증가한다.
+        // 특정 i번째 까지의 누적 합에 대한 나머지를 저장해두고, 만약
         HashMap<Long, Integer> map = new HashMap<>();
         long answer = 0;
         long sum = 0;
         for(int i = 0; i < n; i++) {
             sum += arr[i];
-            if (sum >= 7) {
-                long m = sum % 7;
-                if (m == 0) {
-                    answer = Math.max(answer, i + 1);
-                } else if (map.containsKey(m)) {
-                    answer = Math.max(answer, i - map.get(m));
-                }
-            }
-            if (!map.containsKey(sum)) {
-                map.put(sum, i);
+            long m = sum % 7;
+            if (m == 0) {
+                answer = Math.max(answer, i + 1);
+            } else if (map.containsKey(m)) {
+                answer = Math.max(answer, i - map.get(m));
+            } else {
+                map.put(m, i);
             }
         }
         System.out.print(answer);
