@@ -49,12 +49,14 @@ public class Main {
             if (sum >= 7) {
                 long m = sum % 7;
                 if (m == 0) {
-                    answer = i + 1;
+                    answer = Math.max(answer, i + 1);
                 } else if (map.containsKey(m)) {
                     answer = Math.max(answer, i - map.get(m));
                 }
             }
-            map.put(sum, i);
+            if (!map.containsKey(sum)) {
+                map.put(sum, i);
+            }
         }
         System.out.print(answer);
     }
