@@ -22,7 +22,7 @@ public class Main {
             close[i] += close[i + 1];
         }
 
-        int answer = 0;
+        long answer = 0;
         for(int i = 1;i < brakets.length; i++) {
             if (brakets[i - 1] == '(' && brakets[i] == '(') {
                 answer += (close[i]);
