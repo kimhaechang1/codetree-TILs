@@ -48,7 +48,7 @@ public class Main {
         for(int i = 0; i < n; i++) {
             if (map.containsKey(arr[i])) {
                 int idx = map.get(arr[i]);
-                if (i - idx <= arr[i]) {
+                if (i - idx <= k) {
                     answer = Math.max(answer, arr[i]);
                     map.remove(arr[i]);
                 }
