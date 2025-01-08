@@ -40,39 +40,54 @@ public class Main {
     }
 
     void solve() {
-        boolean[] isPointedX = new boolean[1001];
-        boolean[] isPointedY = new boolean[1001];
-        int[][] coordi = new int[1001][1001];
-        int[][] S = new int[1024][1024];
-        for(int i = 0; i < n; i++) {
-            int x = info[i][0];
-            int y = info[i][1];
-            coordi[y][x] = 1;
-            isPointedX[x] = true;
-            isPointedY[y] = true;
-        }
 
-        for(int i = 1; i < 1001; i++) {
-            for(int j = 1;j < 1001; j++) {
-                S[i][j] = S[i][j - 1] + S[i - 1][j] - S[i - 1][j - 1] + coordi[i][j];
+        // x와 y에 따라 정렬을 한다는건 불가능하다.
+        int answer = Integer.MAX_VALUE;
+        // 애초에 X 좌표를 정렬했다고 가정해보자.
+        // 그럼 y는 정렬되어있지 않을 것이다.
+        // 그러면 매 순간 y에 값에 따라 크게 변동은 생길것이다. 하지만 x를 기준으로는 언제나 좌우를 계산하는건 어렵지 않다.
+
+        // 그리고 점점 우측 위로 즉 y,x 가 증가할수록 각 사분면 별 점의 개수가 달라지게 되어있다.
+        // 좌표는 홀수로 주어지기 때문에, 짝수 좌표로만 기준선을 이동시키면 된다.
+        Arrays.sort(info, (a, b) -> {
+            return a[0] - b[0];
+        });
+        for(int y = 0; y <= 1000; y+= 2) {
+            
+            int[] cnt = new int[5];
+            
+            // 현재 결정된 y에 따라 위아래 나누기
+
+            for(int i = 0; i < n; i++) {
+                if (info[i][1] > y) cnt[1]++;
+                else cnt[4]++;
+            }
+
+            // x에 변화가 생기면, 그때 점의 변화도 생겨야 하므로
+            for(int i = 0; i < n; i++) {
+                
+                if (i == 0 || info[i][0] != info[i - 1][0]) {
+                    int maxCnt = 0;
+                    for(int j = 1; j <= 4; j++) {
+                        maxCnt = Math.max(maxCnt, cnt[j]);
+                    }
+                    answer = Math.min(answer, maxCnt);
+                }
+                
+
+                // 현재 고정된 y에서 x의 변화에 따라 기준선이 달라지기 때문에 좌우 조절을 해준다.
+                // 만약 같은 x좌표가 있다 하더라도, y는 반드시 다르기 때문에 그거에 따른 위아래로 나뉜 점의 개수에서 좌우를 나눠주어야 한다.
+                if (info[i][1] > y) {
+                    cnt[1]--;
+                    cnt[2]++;
+                } else {
+                    cnt[4]--;
+                    cnt[3]++;
+                }
             }
         }
-
-        // 2차원 평면 누적합인데
-        // 2중 for문을 돌면서 각 사분면의 누적합을 구하고 그러한 최대이자 최소를 구해야함\
-        int ans = Integer.MAX_VALUE;
-        for(int i = 1; i < 1001; i++) {
-            for(int j = 1; j < 1001; j++) {
-                if (isPointedY[i] || isPointedX[i]) continue;
-                int max = 0;
-                max = Math.max(max, S[i][j]);
-                max = Math.max(max, S[i][1000] - S[i][j]);
-                max = Math.max(max, S[1000][j] - S[i][j]);
-                max = Math.max(max, S[1000][1000] - (S[i][1000] + S[1000][j]) + S[i][j]);
-                if (max == 0) continue;
-                ans = Math.min(ans, max);
-            }
-        }
-        System.out.print(ans);
+        System.out.print(answer);
+        
+        
     }
 }
