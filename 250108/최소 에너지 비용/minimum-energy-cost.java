@@ -4,8 +4,8 @@ import java.io.*;
 public class Main {
 
     static int n;
-    static int[] arr;
-    static int[] cost;
+    static long[] arr;
+    static long[] cost;
     static BufferedReader bf;
     static StringTokenizer stk;
 
@@ -27,8 +27,8 @@ public class Main {
     void input() throws Exception {
 
         n = Integer.parseInt(bf.readLine());
-        arr = new int[n];
-        cost = new int[n - 1];
+        arr = new long[n];
+        cost = new long[n - 1];
         stk = new StringTokenizer(bf.readLine());
         for(int i = 0; i < n - 1; i++) {
             cost[i] = Integer.parseInt(stk.nextToken());
@@ -58,10 +58,10 @@ public class Main {
         // 총 10의 비용이 발생하는 것 이지만
         // n - 3에서 애초에 끝까지 가는 비용을 얻는다고 생각하면 총 cost는 4이고 에너지비용은 8이 들기 때문에 더 싸다.
 
-        int[] minCost = new int[n];
+        long[] minCost = new long[n];
         minCost[n - 2] = cost[n - 2] * arr[n - 2];
         
-        int[] ws = new int[n - 1];
+        long[] ws = new long[n - 1];
         ws[n - 2] = cost[n - 2];
         for(int i = n - 3; i > -1 ; i--) ws[i] = ws[i + 1] + cost[i];
         
