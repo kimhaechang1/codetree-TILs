@@ -43,18 +43,16 @@ public class Main {
         // 연속된 구간을 찾는것은 투포인터, 누적합 등으로 해결가능
         // 투포인터로 cnt 배열을 채워나가다가, 깨지는 순간 ? start포인터를 올린다.
         int[] cnt = new int[100_001];
-        int start = 0;
-        int end = 0;
+        
         int ans = 0;
-        while(end < n) {
-            cnt[arr[end]]++;
-            if (cnt[arr[end]] == 1) {
-                ans = Math.max(ans, end - start + 1);
-            } else if (cnt[arr[end]] >= 2) {
-                cnt[arr[start]]--;
-                start++;
+        int end = 0;
+        for(int i = 0; i < n; i++) {
+            while(end < n && cnt[arr[end]] == 0) {
+                cnt[arr[end]]++;
+                end++;
             }
-            end++;
+            ans = Math.max(ans, end - i);
+            cnt[arr[i]]--;
         }
 
         System.out.print(ans);
