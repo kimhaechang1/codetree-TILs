@@ -41,16 +41,20 @@ public class Main {
     void solve() {
         // 두 원소를 골라 그 합이 k 이하
         // 두 포인터에 대해서 양쪽 끝에서 시작하는가, 아니면 양쪽이 같은지점에서 출발하는가 둘 중 하나다.
+        // 만약 둘다 한쪽 끝에서 출발한다면, 
         Arrays.sort(arr);
         int start = 0;
         int cnt = 0;
-        int end = arr.length - 1;
+        int end = 1;
         while(start < end) {
+            while(end < n && arr[start] + arr[end] <= s) {
+                end++;
+            }
+
+            if (end == n || arr[start] + arr[end] > s) end--;
             if (arr[start] + arr[end] <= s) {
                 cnt += (end - start);
                 start++;
-            } else {
-                end--;
             }
         }
         System.out.print(cnt);
