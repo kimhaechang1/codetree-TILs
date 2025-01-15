@@ -48,11 +48,13 @@ public class Main {
         int e1 = 1;
         int mxLen1 = 1;
         PriorityQueue<Integer> answerPQ = new PriorityQueue<>(Collections.reverseOrder());
+        // 
         while(e1 < n) {
             while(s1 < e1) {
 
                 // 만약 해당 그룹내에 최대값이 현재 e를 받아들일 수 없다면?
                 if (Math.abs(arr[s1] - arr[e1]) > k || Math.abs(arr[e1 - 1] - arr[e1]) > k) {
+                    
                     s1++;
                 }  
                 
@@ -62,10 +64,14 @@ public class Main {
                     break;
                 }
             }
-            answerPQ.add(mxLen1);
-            mxLen1 = 0;
+            if (s1 == e1) {
+                answerPQ.add(mxLen1);
+                mxLen1 = 0;
+            }
+            
             e1++;
         }
+        answerPQ.add(mxLen1);
         System.out.print(answerPQ.poll() + answerPQ.poll());
 
     }
