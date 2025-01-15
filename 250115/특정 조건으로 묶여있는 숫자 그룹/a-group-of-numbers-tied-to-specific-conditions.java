@@ -42,38 +42,53 @@ public class Main {
         //  각 그룹내의 숫자들끼리는 차가 k를 넘지 않아야 한다.
         // 한 숫자는 최대 한 개의 그룹에만 속할 수 있고, 어느 그룹에도 속하지 않는 숫자가 있을 수 있다.
 
+        // 정확하게 겹치지않는 구간으로 나눌려면
+        // 특정 0 ~ i번째까지의 그룹과 i ~ n 까지의 만들 수 있는 최대 원소 그룹을 기록하면 된다.
+        // 이는 곧 LR 테크닉에 해당된다.
+
         Arrays.sort(arr);
+
+        int[] origin = new int[n + 1];
+        for(int i = 1; i < n + 1; i++) origin[i] = arr[i - 1];
+
+        int[] L = new int[n + 1];
+        int[] R = new int[n + 1];
+        
+        int s = 1;
+        int e = 1;
+        int mx = 0;
         int ans = 0;
-        int s1 = 0;
-        int e1 = 1;
-        int mxLen1 = 1;
-        PriorityQueue<Integer> answerPQ = new PriorityQueue<>(Collections.reverseOrder());
-        // 
-        while(e1 < n) {
-            while(s1 < e1) {
-
-                // 만약 해당 그룹내에 최대값이 현재 e를 받아들일 수 없다면?
-                if (Math.abs(arr[s1] - arr[e1]) > k || Math.abs(arr[e1 - 1] - arr[e1]) > k) {
-                    
-                    s1++;
-                }  
-                
-                // 최솟값이 k를 넘어갈 수 없다면 최솟값을 줄이는 방법도 있음
-                if (Math.abs(arr[s1] - arr[e1]) <= k && Math.abs(arr[e1 - 1] - arr[e1]) <= k) {
-                    mxLen1 = Math.max(e1 - s1 + 1, mxLen1);
-                    break;
-                }
-            }
-            if (s1 == e1) {
-                answerPQ.add(mxLen1);
-                mxLen1 = 0;
-            }
+        while(e < n + 1) {
             
-            e1++;
-        }
-        answerPQ.add(mxLen1);
-        System.out.print(answerPQ.poll() + answerPQ.poll());
+            while(s < e && origin[e] - origin[s] > k) {
+                // 만약 최대 최소차가 k 보다 이미 크다면 최소를 높여야 한다.
+                s++;
+            }
+            mx = Math.max(mx, e - s + 1);
+            L[e] = mx;
+            e++;
+        } 
 
+        e = n;
+        s = n;
+        mx = 0;
+        while(e > 0) {
+            
+            while(s > e && origin[s] - origin[e] > k) {
+                // 만약 최대 최소차가 k 보다 이미 크다면 최소를 높여야 한다.
+                s--;
+            }
+            mx = Math.max(mx, s - e + 1);
+            R[e] = mx;
+            e--;
+        } 
+
+        // 원소가 하나일때는 ? 
+        ans = L[1];
+        for(int i = 1; i < n; i++) {
+            ans = Math.max(ans, L[i] + R[i + 1]);
+        }
+        System.out.print(ans);
     }
 
 }
