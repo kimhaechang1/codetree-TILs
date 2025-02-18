@@ -56,11 +56,13 @@ public class Main {
         }
         int s = 0;
         int e = n - 1;
+        int[] count2 = new int[m + 1];
         while(e > s) {
             if (count[arr[e]] - 1 == 0) {
                 break;
             }
             count[arr[e]]--;
+            count2[arr[e]]++;
             e--;
         }
 
@@ -69,7 +71,14 @@ public class Main {
                 break;
             }
             count[arr[s]]--;
+            count2[arr[s]]++;
             s++;
+        }
+        for(int i = 1; i<= m; i++) {
+            if (count2[i] == 0) {
+                System.out.println(-1);
+                return;
+            }
         }
         System.out.println(e - s + 1);
     }
