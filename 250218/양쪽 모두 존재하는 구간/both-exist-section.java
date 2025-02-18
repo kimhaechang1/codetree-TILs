@@ -42,44 +42,62 @@ public class Main {
 
         // 연속된 구간이니까 투포인터를 접근해볼 수 있고, 양쪽 끝에서 시작하는 투포인터를 고려해볼 수 있다.
 
-        // 한쪽만 먼저 좀 줄이고, 다른반대쪽을 줄이고 하면 되지않을까?
+        // 다시 생각해보자. 처음엔 모든 숫자가 아웃구간일 것이다.
+        // 그리고나서 투포인터로 점점 인 구간의 숫자종류를 늘려갈 것이고, 그러한 서로다른 숫자가 m개가 된다면 그때부터 줄여볼 수 있을 것이다.
 
-        int[] count = new int[m + 1];
-        for(int i =  0; i < n; i++) {
-            count[arr[i]]++;
-        }
-        for(int i = 1; i <= m; i++) {
-            if (count[i] < 2) {
-                System.out.println(-1);
-                return;
-            }
-        }
-        int s = 0;
-        int e = n - 1;
-        int[] count2 = new int[m + 1];
-        while(e > s) {
-            if (count[arr[e]] == 1) {
-                break;
-            }
-            count[arr[e]]--;
-            count2[arr[e]]++;
-            e--;
+        int[] countIn = new int[m + 1];
+        int[] countOut = new int[m + 1];
+        int distinctIn = 0;
+        int distinctOut = 0;
+        for(int elem: arr) {
+            countOut[elem]++;
+            if (countOut[elem] == 1) distinctOut++;
         }
 
-        while(s < e) {
-            if (count[arr[s]] == 1) {
+        int e = 0;
+        int ans = Integer.MAX_VALUE;
+        for(int s = 0; s < n; s++) {
+            // 처음엔 0, 0에서부터
+            while(e < n && distinctIn < m) {
+                // e를 점점 늘리면서 in 구간의 원소 잡기
+                countIn[arr[e]]++;
+                if (countIn[arr[e]] == 1) {
+                    distinctIn++;
+                }
+                countOut[arr[e]]--;
+                if (countOut[arr[e]] == 0) {
+                    distinctOut--;
+                }
+                e++;
+                if (distinctIn == m) {
+                    // 서로다른 m개가 잡혔을 경우 스탑
+                    break;
+                }
+                // in에 넣은건 반대로 out에서 빠진단 얘기
+
+
+            }
+            if (distinctIn < m) {
+                // 암만 영끌해도 m개의 서로다른 수를 못먹은 경우
                 break;
             }
-            count[arr[s]]--;
-            count2[arr[s]]++;
-            s++;
-        }
-        for(int i = 1; i<= m; i++) {
-            if (count2[i] == 0) {
-                System.out.println(-1);
-                return;
+            if (distinctOut == m) {
+                // 위에서 In은 적절히 되었고 out또한 m개가 달성되었다면 정답 갱신 대상임
+                // 중요한점은 여기서 잡히는 e는 이미 다음에 in으로 편성될 e라는 것, 아직 e는 이번 반복에서 추가된원소는 아님
+                ans = Math.min(ans, e - s);
             }
+            countIn[arr[s]]--;
+            if (countIn[arr[s]] == 0) {
+                distinctIn--;
+            }
+
+            countOut[arr[s]]++;
+            if (countOut[arr[s]] == 1) {
+                distinctOut++;
+            }
+
         }
-        System.out.println(e - s + 1);
+
+        System.out.println(ans == Integer.MAX_VALUE ? -1 : ans);
     }
 }
