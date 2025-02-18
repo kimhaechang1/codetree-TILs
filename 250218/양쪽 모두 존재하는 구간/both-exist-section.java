@@ -58,7 +58,7 @@ public class Main {
         int e = n - 1;
         int[] count2 = new int[m + 1];
         while(e > s) {
-            if (count[arr[e]] - 1 == 0) {
+            if (count[arr[e]] == 1) {
                 break;
             }
             count[arr[e]]--;
@@ -67,7 +67,7 @@ public class Main {
         }
 
         while(s < e) {
-            if (count[arr[s]] - 1 == 0) {
+            if (count[arr[s]] == 1) {
                 break;
             }
             count[arr[s]]--;
