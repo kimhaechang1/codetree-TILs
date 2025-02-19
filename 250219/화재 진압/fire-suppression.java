@@ -41,18 +41,66 @@ public class Main {
         // 화재는 정확히 1곳에서만 발생하며 가장 근처에 있는 소방서에서 출동하여 진입한다.
         // 거리 1을 이동하는 데 시간이 1초 소요되는데, 가장 오래걸리는 시간을 구하는 프로그램
 
-        // -1 0 2 4 6
-        TreeSet<Integer> mSet = new TreeSet<>();
-        for(int pos: arr2) mSet.add(pos);
-        int ans = 0;
-        for(int i = 0; i < n; i++) {
-            Integer lower = mSet.ceiling(arr1[i]);
-            Integer upper = mSet.floor(arr1[i]);
-            int ld = lower == null ? Integer.MIN_VALUE : Math.abs(lower - arr1[i]);
-            int ud = upper == null ? Integer.MIN_VALUE : Math.abs(upper - arr1[i]);
-            ans = Math.max(ans, Math.max(ld, ud));
+       int ans = 0;
+       HashMap<Integer, Integer> fireMap = new HashMap<>();
+       HashSet<Integer> ffSet = new HashSet<>();
+       ArrayList<Integer> allPos = new ArrayList<>();
+       for(int i = 0; i < n; i++) {
+            allPos.add(arr1[i]);
+            fireMap.put(arr1[i], Integer.MAX_VALUE);
+       }
+       for(int i = 0; i < m; i++) {
+            allPos.add(arr2[i]);
+            ffSet.add(arr2[i]);
+       }
+
+        Collections.sort(allPos);
+        int idx = 0;
+        for(; idx < allPos.size();) {
+            int pos = allPos.get(idx);
+            if (!ffSet.contains(pos)) {
+                idx++;
+                continue;
+            }
+            int selectedPos = pos;
+            while(idx < allPos.size()) {
+                int anyPos = allPos.get(idx);
+                if (selectedPos != anyPos && ffSet.contains(anyPos)) {
+                    break;
+                }
+                if (fireMap.containsKey(anyPos)) {
+                    int dis = Math.abs(selectedPos - anyPos);
+                    fireMap.put(anyPos, Math.min(fireMap.get(anyPos), dis));
+                }
+                idx++;
+            }
         }
-        System.out.println(ans);
+
+        idx = allPos.size() - 1;
+        for(; idx > -1;) {
+            int pos = allPos.get(idx);
+            if (!ffSet.contains(pos)) {
+                idx--;
+                continue;
+            }
+            int selectedPos = pos;
+            while(idx > -1) {
+                int anyPos = allPos.get(idx);
+                if (selectedPos != anyPos && ffSet.contains(anyPos)) {
+                    break;
+                }
+                if (fireMap.containsKey(anyPos)) {
+                    int dis = Math.abs(selectedPos - anyPos);
+                    fireMap.put(anyPos, Math.min(fireMap.get(anyPos), dis));
+                }
+                idx--;
+            }
+        }
+
+        for(Map.Entry<Integer, Integer> entry: fireMap.entrySet()) {
+            ans = Math.max(ans, entry.getValue());
+        }
+        System.out.print(ans);
 
     }
 }
